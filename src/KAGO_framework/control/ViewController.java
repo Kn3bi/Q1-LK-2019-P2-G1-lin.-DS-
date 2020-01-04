@@ -214,7 +214,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
      * update vom Objekt nicht mehr aufgerufen.
      * @param i Das zu entfernende Objekt.
      */
-    public void remove(Interactable i){
+    public void removeI(Interactable i){
         if (i != null){
             SwingUtilities.invokeLater(() -> scenes.get(currentScene).interactables.remove(i));
         }

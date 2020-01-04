@@ -8,7 +8,7 @@ import my_project.control.ProgramController;
 
 import java.awt.event.MouseEvent;
 
-public class Startbildschirm extends GraphicalObject {
+public class Startbildschirm extends InteractiveGraphicalObject {
 
     private Button anleitung;
     private Button spiel;
@@ -20,8 +20,8 @@ public class Startbildschirm extends GraphicalObject {
         this.viewController = viewController;
         anleitung = new Button(100, 400, "Anleitung", 50, 150, 0, this);
         spiel = new Button(500, 400, "Zum Spiel", 50, 150, 2, this);
-        viewController.draw(anleitung);
-        viewController.draw(spiel);
+        viewController.draw(anleitung, 1);
+        viewController.draw(spiel, 1);
     }
 
     @Override
@@ -39,5 +39,40 @@ public class Startbildschirm extends GraphicalObject {
 
     public void setSzene(int i){
         pC.setSzene(i);
+    }
+
+    @Override
+    public void keyPressed(int key) {
+
+    }
+
+    @Override
+    public void keyReleased(int key) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
     }
 }

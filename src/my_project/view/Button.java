@@ -1,5 +1,6 @@
 package my_project.view;
 
+import KAGO_framework.control.Interactable;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
@@ -42,8 +43,11 @@ public class Button extends InteractiveGraphicalObject {
     public void mouseClicked(MouseEvent e) {
         double mouseX = e.getX();
         double mouseY = e.getY();
+        System.out.println(mouseY);
+        System.out.println(mouseX);
         if(mouseX > x && mouseX < x+breite && mouseY > y && mouseY < y+hoehe){
             startbildschirm.setSzene(buttonNummer);
+            System.out.println("Hello?");
         }
     }
 

@@ -1,6 +1,7 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import my_project.view.Anleitung;
 import my_project.view.Startbildschirm;
 
 import java.awt.event.MouseEvent;
@@ -19,6 +20,8 @@ public class ProgramController {
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private Startbildschirm startbildschirm;
     private Anleitung anleitung;
+    private SpielerControll spielerControll;
+
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -34,9 +37,15 @@ public class ProgramController {
      * Diese Methode wird genau ein mal nach Programmstart aufgerufen. Achtung: funktioniert nicht im Szenario-Modus
      */
     public void startProgram() {
-        szene = 1;
         startbildschirm = new Startbildschirm(viewController, this);
-        viewController.draw(startbildschirm);
+        viewController.draw(startbildschirm, 1);
+        anleitung = new Anleitung();
+        viewController.draw(anleitung, 0);
+        spielfeldControll = new SpielfeldControll();
+        viewController.draw(spielfeldControll, 2);
+        spielerControll = new SpielerControll();
+        viewController.draw(spielfeldControll, 2);
+        viewController.showScene(2);
     }
 
     /**
@@ -46,7 +55,7 @@ public class ProgramController {
      */
     public void updateProgram(double dt){
         if(szene ==0){
-            viewController.remove(startbildschirm);
+            viewController.removeI(startbildschirm);
 
         }else if(szene == 2){
             spielfeldControll = new SpielfeldControll();
@@ -67,6 +76,6 @@ public class ProgramController {
     }
 
     public void setSzene(int i){
-        szene = i;
+        viewController.showScene(i);
     }
 }
