@@ -37,15 +37,18 @@ public class ProgramController {
      * Diese Methode wird genau ein mal nach Programmstart aufgerufen. Achtung: funktioniert nicht im Szenario-Modus
      */
     public void startProgram() {
+        viewController.createScene();
+        viewController.createScene();
+        viewController.createScene();
         startbildschirm = new Startbildschirm(viewController, this);
         viewController.draw(startbildschirm, 1);
-        anleitung = new Anleitung();
+        anleitung = new Anleitung(viewController);
         viewController.draw(anleitung, 0);
         spielfeldControll = new SpielfeldControll();
         viewController.draw(spielfeldControll, 2);
         spielerControll = new SpielerControll();
         viewController.draw(spielfeldControll, 2);
-        viewController.showScene(2);
+        viewController.showScene(1);
     }
 
     /**
@@ -54,13 +57,6 @@ public class ProgramController {
      * @param dt Die Zeit in Sekunden, die seit dem letzten Aufruf der Methode vergangen ist.
      */
     public void updateProgram(double dt){
-        if(szene ==0){
-            viewController.removeI(startbildschirm);
-
-        }else if(szene == 2){
-            spielfeldControll = new SpielfeldControll();
-            viewController.draw(spielfeldControll);
-        }
 
 
     }

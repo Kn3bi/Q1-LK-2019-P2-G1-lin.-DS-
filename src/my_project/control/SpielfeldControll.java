@@ -15,7 +15,7 @@ public class SpielfeldControll extends GraphicalObject {
         spielfelder = new Felder[4][9];
         erzeugeFelder();
 
-        setNewImage("assets/images/monopolySpielbrett.jpg");
+        setNewImage("assets/images/monopoly.jpg");
         spielbrett = getMyImage();
     }
 

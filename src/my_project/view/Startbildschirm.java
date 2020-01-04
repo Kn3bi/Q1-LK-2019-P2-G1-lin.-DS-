@@ -18,8 +18,10 @@ public class Startbildschirm extends InteractiveGraphicalObject {
     public Startbildschirm(ViewController viewController, ProgramController pC){
         this.pC = pC;
         this.viewController = viewController;
-        anleitung = new Button(100, 400, "Anleitung", 50, 150, 0, this);
-        spiel = new Button(500, 400, "Zum Spiel", 50, 150, 2, this);
+        anleitung = new Button(100, 400, "Anleitung", 50, 150, 0, viewController);
+        spiel = new Button(500, 400, "Zum Spiel", 50, 150, 2, viewController);
+        viewController.register(anleitung, 1);
+        viewController.register(spiel, 1);
         viewController.draw(anleitung, 1);
         viewController.draw(spiel, 1);
     }

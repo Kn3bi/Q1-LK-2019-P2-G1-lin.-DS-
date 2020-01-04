@@ -43,7 +43,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
     // Referenzen
     private DrawFrame drawFrame;    // das Fenster des Programms
     private ProgramController gameController; // das Objekt, das das Programm steuern soll
-    private javax.swing.Timer gameProcess;
+    private Timer gameProcess;
     private ArrayList<Integer> currentlyPressedKeys;
     private ArrayList<Scene> scenes;
     private SoundController soundController;
@@ -83,7 +83,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
         }
         // Starte nebenlaeufigen Prozess, der Zeichnen und Animation uebernimmt
         lastLoop = System.nanoTime();
-        gameProcess = new javax.swing.Timer(dt, this);
+        gameProcess = new Timer(dt, this);
         gameProcess.start();
     }
 
@@ -214,7 +214,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
      * update vom Objekt nicht mehr aufgerufen.
      * @param i Das zu entfernende Objekt.
      */
-    public void removeI(Interactable i){
+    public void removeI (Interactable i){
         if (i != null){
             SwingUtilities.invokeLater(() -> scenes.get(currentScene).interactables.remove(i));
         }
@@ -226,7 +226,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
      * @param i Das zu entfernende Objekt
      * @param sceneIndex Der Index des DrawingPanel-Objekts von dem entfernt werden soll
      */
-    public void remove(Interactable i, int sceneIndex){
+    public void removeI(Interactable i, int sceneIndex){
         if ( sceneIndex < scenes.size() && i != null){
             SwingUtilities.invokeLater(() -> scenes.get(sceneIndex).interactables.remove(i));
         }
