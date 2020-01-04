@@ -10,8 +10,10 @@ import java.awt.image.BufferedImage;
 public class SpielfeldControll extends GraphicalObject {
     private Felder[][] spielfelder;
     private BufferedImage spielbrett;
+    private SpielerControll sC;
 
-    public SpielfeldControll(){
+    public SpielfeldControll(SpielerControll spC){
+        sC = spC;
         spielfelder = new Felder[4][9];
         erzeugeFelder();
 
@@ -27,6 +29,7 @@ public class SpielfeldControll extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
+        drawTool.drawText(700, 30, "Aktueller Spieler:" );
         drawTool.drawImage(spielbrett, 0, 0);
     }
 
