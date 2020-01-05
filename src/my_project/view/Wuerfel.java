@@ -17,7 +17,7 @@ public class Wuerfel {
 
     }
 
-    private int wuerfelnIntern(){
+    public int wuerfelnIntern(){
         int augzahl = 1+ (int)(Math.random()*6);
         if(augzahl == 1){
 

@@ -2,16 +2,21 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
+import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.model.Feld;
+import my_project.view.Wuerfel;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class SpielfeldControll extends GraphicalObject {
+public class SpielfeldControll extends InteractiveGraphicalObject {
     private Feld[][] spielfelder;
     private BufferedImage spielbrett;
     private SpielerControll sC;
     private ViewController vC;
+
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
         this.vC = vC;
@@ -19,7 +24,8 @@ public class SpielfeldControll extends GraphicalObject {
         spielfelder = new Feld[4][10];
         erzeugeFelder();
 
-        setNewImage("assets/images/monopoly.jpg");
+
+        setNewImage("assets/images/Monopoly/monopoly.jpg");
         spielbrett = getMyImage();
     }
 
@@ -75,6 +81,41 @@ public class SpielfeldControll extends GraphicalObject {
 
     @Override
     public void update(double dt) {
+
+    }
+
+    @Override
+    public void keyPressed(int key) {
+
+    }
+
+    @Override
+    public void keyReleased(int key) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
 
     }
 
