@@ -47,6 +47,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
     public void keyPressed(int key) {
         if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()){
             spieler.front().geheVorwaerts(meineWuerfel.wuerfelnIntern());
+            spieler.front().setWuerfe(false);
         }
     }
 
@@ -91,5 +92,12 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     public boolean aktuellerSpielerHatWurf(){
         return spieler.front().getWuerfe();
+    }
+
+    public void rotiereSpieler(){
+        System.out.println("> Die Rotation funktioniert");
+        spieler.enqueue(spieler.front());
+        spieler.front().setWuerfe(true);
+        spieler.dequeue();
     }
 }

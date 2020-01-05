@@ -1,31 +1,25 @@
 package my_project.view;
 
-import KAGO_framework.control.Interactable;
 import KAGO_framework.control.ViewController;
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
 
 import java.awt.event.MouseEvent;
 
-public class Button extends InteractiveGraphicalObject {
+public abstract class ButtonOberklasse extends InteractiveGraphicalObject {
 
     private String text;
     private int hoehe;
     private double breite;
-    private ViewController startbildschirm;
+    protected ViewController viewController;
 
-
-    private int buttonNummer;
-
-    public Button(double x, double y, String text, int hoehe, double breite, int buttonNummer, ViewController sb){
-        startbildschirm = sb;
+    public ButtonOberklasse(double x, double y, String text, int hoehe, double breite, ViewController sb){
+        viewController = sb;
         this.x = x;
         this.y = y;
         this.text = text;
         this.hoehe = hoehe;
         this.breite = breite;
-        this.buttonNummer = buttonNummer;
     }
 
     @Override
@@ -46,7 +40,7 @@ public class Button extends InteractiveGraphicalObject {
         double mouseX = e.getX();
         double mouseY = e.getY();
         if(mouseX > x && mouseX < x+breite && mouseY > y && mouseY < y+hoehe){
-            startbildschirm.showScene(buttonNummer);
+            reagiere();
         }
     }
 
@@ -78,4 +72,6 @@ public class Button extends InteractiveGraphicalObject {
     public void mousePressed(MouseEvent e) {
 
     }
+
+    protected abstract void reagiere();
 }

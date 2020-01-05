@@ -1,21 +1,18 @@
 package my_project.view;
 
-import KAGO_framework.control.Interactable;
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-import java.awt.image.BufferedImage;
-
 public class Anleitung extends GraphicalObject {
 
     private String[] anleitung;
-    private Button zurueck;
+    private SzenenButton zurueck;
     private ViewController vC;
 
     public Anleitung(ViewController vC){
         this.vC = vC;
-        zurueck = new Button(750, 10, "Zurück", 40, 100, 1, vC);
+        zurueck = new SzenenButton(750, 10, "Zurück", 40, 100, 1, vC);
         vC.register(zurueck, 0);
         vC.draw(zurueck, 0);
         anleitung = new String[10];

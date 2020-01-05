@@ -28,13 +28,13 @@ public class Feld extends GraphicalObject {
         drawTool.setCurrentColor(0,0,0,255);
         drawTool.drawRectangle(x, y, width, height);
         drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
-        drawTool.drawFilledCircle(20, 40, 10);
+        drawTool.drawFilledCircle(x+20, y+40, 10);
         drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
-        drawTool.drawFilledCircle(40, 40, 10);
+        drawTool.drawFilledCircle(x+40, y+40, 10);
         drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
-        drawTool.drawFilledCircle(20, 60, 10);
+        drawTool.drawFilledCircle(x+20, y+60, 10);
         drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
-        drawTool.drawFilledCircle(40, 60, 10);
+        drawTool.drawFilledCircle(x+40, y+60, 10);
     }
 
     @Override
@@ -53,9 +53,12 @@ public class Feld extends GraphicalObject {
             sichtbarkeitg = 255;
         }
     }
+
     public void diesesFeldVerlassen(String farbe){
         if(farbe.equals("rot")){
+            System.out.println("> Sichtbarkeit auf dem aktuellen FEld wird auf Null gesetzt");
             sichtbarkeitr = 0;
+            System.out.println(sichtbarkeitr);
         }else if(farbe.equals("grün")){
             sichtbarkeitgr = 0;
         }else if(farbe.equals("blau")){

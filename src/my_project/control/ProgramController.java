@@ -47,8 +47,8 @@ public class ProgramController {
         viewController.draw(anleitung, 0);
         spielfeldControll = new SpielfeldControll(spielerControll, viewController);
         spielerControll = new SpielerControll(this);
-        viewController.draw(spielfeldControll, 2);
-
+        viewController.register(spielerControll, 2);
+        spielfeldControll.setSpielerControll(spielerControll);
         viewController.draw(spielfeldControll, 2);
         viewController.showScene(1);
     }
@@ -80,4 +80,5 @@ public class ProgramController {
     public Feld[][] getSpielfelder(){
         return spielfeldControll.getSpielfelder();
     }
+
 }

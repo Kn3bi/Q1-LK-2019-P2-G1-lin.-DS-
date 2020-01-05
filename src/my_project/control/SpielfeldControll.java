@@ -1,13 +1,12 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.model.Feld;
-import my_project.view.Wuerfel;
+import my_project.view.RotationsButton;
+import my_project.view.SzenenButton;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
@@ -16,6 +15,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private BufferedImage spielbrett;
     private SpielerControll sC;
     private ViewController vC;
+    private RotationsButton naechsterButton;
 
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
@@ -23,10 +23,11 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         sC = spC;
         spielfelder = new Feld[4][10];
         erzeugeFelder();
-
-
         setNewImage("assets/images/Monopoly/monopoly.jpg");
         spielbrett = getMyImage();
+        naechsterButton = new RotationsButton(750, 600, "Nächster", 40, 100, vC, sC);
+        vC.register(naechsterButton, 2);
+        vC.draw(naechsterButton, 2);
     }
 
     private void erzeugeFelder(){
@@ -81,7 +82,9 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
 
     @Override
     public void update(double dt) {
-
+        if(sC.aktuellerSpielerHatWurf() == false){
+            registriereNaechsterButton();
+        }
     }
 
     @Override
@@ -121,5 +124,18 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
 
     public Feld[][] getSpielfelder(){
         return spielfelder;
+    }
+
+    public void registriereNaechsterButton(){
+
+    }
+
+    public void setSpielerControll(SpielerControll sC){
+        this.sC = sC;
+        naechsterButton.setSpielerControll(sC);
+    }
+
+    public void rotiereSpieler(){
+        sC.rotiereSpieler();
     }
 }
