@@ -45,9 +45,10 @@ public class ProgramController {
         viewController.draw(startbildschirm, 1);
         anleitung = new Anleitung(viewController);
         viewController.draw(anleitung, 0);
+        spielfeldControll = new SpielfeldControll(spielerControll, viewController);
         spielerControll = new SpielerControll(this);
         viewController.draw(spielfeldControll, 2);
-        spielfeldControll = new SpielfeldControll(spielerControll, viewController);
+
         viewController.draw(spielfeldControll, 2);
         viewController.showScene(1);
     }

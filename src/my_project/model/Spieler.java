@@ -8,8 +8,10 @@ public class Spieler {
     private String farbe;
     private List<Feld> spielfelder;
 
-    public Spieler(String farbe){
-        spielfelder = new List<>();
+    public Spieler(String farbe, List<Feld> list){
+        spielfelder = list;
+        spielfelder.toFirst();
+        spielfelder.getContent().aufDiesemFeld(farbe);
         this.farbe = farbe;
 
     }
