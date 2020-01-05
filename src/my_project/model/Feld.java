@@ -28,13 +28,13 @@ public class Feld extends GraphicalObject {
         drawTool.setCurrentColor(0,0,0,255);
         drawTool.drawRectangle(x, y, width, height);
         drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
-        drawTool.drawFilledCircle(x+20, y+40, 10);
+        drawTool.drawFilledCircle(x+20, y+40, 20);
         drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
-        drawTool.drawFilledCircle(x+40, y+40, 10);
+        drawTool.drawFilledCircle(x+40, y+40, 20);
         drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
-        drawTool.drawFilledCircle(x+20, y+60, 10);
+        drawTool.drawFilledCircle(x+20, y+60, 20);
         drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
-        drawTool.drawFilledCircle(x+40, y+60, 10);
+        drawTool.drawFilledCircle(x+40, y+60, 20);
     }
 
     @Override

@@ -3,6 +3,7 @@ package my_project.control;
 import KAGO_framework.control.ViewController;
 import my_project.model.Feld;
 import my_project.view.Anleitung;
+import my_project.view.Spielbrett;
 import my_project.view.Startbildschirm;
 
 import java.awt.event.MouseEvent;
@@ -22,6 +23,7 @@ public class ProgramController {
     private Startbildschirm startbildschirm;
     private Anleitung anleitung;
     private SpielerControll spielerControll;
+    private Spielbrett spielbrett;
 
     /**
      * Konstruktor
@@ -41,6 +43,8 @@ public class ProgramController {
         viewController.createScene();
         viewController.createScene();
         viewController.createScene();
+        spielbrett = new Spielbrett();
+        viewController.draw(spielbrett, 2);
         startbildschirm = new Startbildschirm(viewController, this);
         viewController.draw(startbildschirm, 1);
         anleitung = new Anleitung(viewController);
