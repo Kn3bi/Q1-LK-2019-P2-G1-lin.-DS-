@@ -3,11 +3,11 @@ package my_project.model;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-public class Felder extends GraphicalObject {
+public class Feld extends GraphicalObject {
 
     private Gebaude[][] meineGebaude;
 
-    public Felder(int breite, int hoehe, double x, double y){
+    public Feld(int breite, int hoehe, double x, double y){
         width = breite;
         height = hoehe;
         this.x = x;
@@ -17,6 +17,8 @@ public class Felder extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(255,0,0,255);
+        drawTool.drawRectangle(x, y, width, height);
 
     }
 

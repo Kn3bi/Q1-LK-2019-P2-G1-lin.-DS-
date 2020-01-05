@@ -8,12 +8,16 @@ import my_project.model.Spieler;
 public class SpielerControll extends GraphicalObject {
 
     private Queue<Spieler> spieler;
+    private ProgramController pC;
 
-    public SpielerControll(){
+    public SpielerControll(ProgramController pC){
+        this.pC = pC;
         spieler = new Queue<>();
-        for(int i = 0; i < 4; i++){
-            spieler.enqueue(new Spieler());
-        }
+        spieler.enqueue(new Spieler("rot"));
+        spieler.enqueue(new Spieler("grün"));
+        spieler.enqueue(new Spieler("gelb"));
+        spieler.enqueue(new Spieler("blau"));
+
     }
 
     @Override

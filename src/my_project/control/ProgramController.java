@@ -1,6 +1,7 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import my_project.model.Feld;
 import my_project.view.Anleitung;
 import my_project.view.Startbildschirm;
 
@@ -44,9 +45,9 @@ public class ProgramController {
         viewController.draw(startbildschirm, 1);
         anleitung = new Anleitung(viewController);
         viewController.draw(anleitung, 0);
-        spielerControll = new SpielerControll();
+        spielerControll = new SpielerControll(this);
         viewController.draw(spielfeldControll, 2);
-        spielfeldControll = new SpielfeldControll(spielerControll);
+        spielfeldControll = new SpielfeldControll(spielerControll, viewController);
         viewController.draw(spielfeldControll, 2);
         viewController.showScene(1);
     }
@@ -73,5 +74,9 @@ public class ProgramController {
 
     public void setSzene(int i){
         viewController.showScene(i);
+    }
+
+    public Feld[][] getSpielfelder(){
+        return spielfeldControll.getSpielfelder();
     }
 }

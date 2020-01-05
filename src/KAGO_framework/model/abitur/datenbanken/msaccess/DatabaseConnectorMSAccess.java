@@ -71,7 +71,7 @@ public class DatabaseConnectorMSAccess {
         //Spaltenanzahl ermitteln
         int columnCount = resultset.getMetaData().getColumnCount();
         
-        //Spaltennamen und Spaltentypen in Felder uebertragen
+        //Spaltennamen und Spaltentypen in Feld uebertragen
         String[] resultColumnNames = new String[columnCount];
         String[] resultColumnTypes = new String[columnCount];
         for (int i = 0; i < columnCount; i++){
