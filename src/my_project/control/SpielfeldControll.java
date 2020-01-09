@@ -15,6 +15,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private SpielerControll sC;
     private ViewController vC;
     private RotationsButton naechsterButton;
+    private Feld feld;
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
         this.vC = vC;
@@ -92,6 +93,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     public void rotiereSpieler(){
         sC.rotiereSpieler();
     }
+
     private void erzeugeFelder(){
         for(int i = 0; i < spielfelder[0].length; i++){
             if(i != 9){
