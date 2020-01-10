@@ -97,40 +97,40 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private void erzeugeFelder(){
         for(int i = 0; i < spielfelder[0].length; i++){
             if(i != 9){
-                spielfelder[0][i] = new Feld(58, 90, 550-i*58, 610);
+                spielfelder[0][i] = new Feld(58, 90, 550-i*58, 610, "", 1);
                 vC.draw(spielfelder[0][i], 2);
             }else{
-                spielfelder[0][i] = new Feld(90, 90, 550-(i-1)*58-90, 610);
+                spielfelder[0][i] = new Feld(90, 90, 550-(i-1)*58-90, 610, "", 1);
                 vC.draw(spielfelder[0][i], 2);
             }
 
         }
         for(int i = 0; i < spielfelder[1].length; i++){
             if(i != 9){
-                spielfelder[1][i] = new Feld(90, 58, 0, 550-58*i);
+                spielfelder[1][i] = new Feld(90, 58, 0, 550-58*i, "", 1);
                 vC.draw(spielfelder[1][i], 2);
             }else{
-                spielfelder[1][i] = new Feld(90, 90, 0, 550-58*(i-1)-90);
+                spielfelder[1][i] = new Feld(90, 90, 0, 550-58*(i-1)-90, "", 1);
                 vC.draw(spielfelder[1][i], 2);
             }
 
         }
         for(int i = 0; i < spielfelder[2].length; i++){
             if(i != 9){
-                spielfelder[2][i] = new Feld(58, 90, 90+58*i, 0);
+                spielfelder[2][i] = new Feld(58, 90, 90+58*i, 0, "", 1);
                 vC.draw(spielfelder[2][i], 2);
             }else{
-                spielfelder[2][i] = new Feld(90, 90, 90+58*i, 0);
+                spielfelder[2][i] = new Feld(90, 90, 90+58*i, 0, "", 1);
                 vC.draw(spielfelder[2][i], 2);
             }
 
         }
         for(int i = 0; i < spielfelder[3].length; i++){
             if(i != 9){
-                spielfelder[3][i] = new Feld(90, 58, 610, 90+58*i);
+                spielfelder[3][i] = new Feld(90, 58, 610, 90+58*i, "", 1);
                 vC.draw(spielfelder[3][i], 2);
             }else{
-                spielfelder[3][i] = new Feld(90, 90, 610, 90+58*i);
+                spielfelder[3][i] = new Feld(90, 90, 610, 90+58*i, "", 1);
                 vC.draw(spielfelder[3][i], 2);
             }
 

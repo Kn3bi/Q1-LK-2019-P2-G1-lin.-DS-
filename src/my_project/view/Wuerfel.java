@@ -1,20 +1,22 @@
 package my_project.view;
 
+import KAGO_framework.model.GraphicalObject;
+import KAGO_framework.view.DrawTool;
+
 import java.awt.image.BufferedImage;
 
-public class Wuerfel {
+public class Wuerfel extends GraphicalObject {
     private BufferedImage currentWuerfel01;
     private BufferedImage currentWuerfel02;
-    private BufferedImage wuerfel01;
-    private BufferedImage wuerfel02;
-    private BufferedImage wuerfel03;
-    private BufferedImage wuerfel04;
-    private BufferedImage wuerfel05;
-    private BufferedImage wuerfel06;
+    private BufferedImage[] wuerfel;
 
     public Wuerfel(){
 
 
+    }
+
+    public int wuerfeln(){
+        return wuerfelnIntern();
     }
 
     public int wuerfelnIntern(){
@@ -33,5 +35,15 @@ public class Wuerfel {
 
         }
         return augzahl;
+    }
+
+    @Override
+    public void draw(DrawTool drawTool) {
+
+    }
+
+    @Override
+    public void update(double dt) {
+
     }
 }
