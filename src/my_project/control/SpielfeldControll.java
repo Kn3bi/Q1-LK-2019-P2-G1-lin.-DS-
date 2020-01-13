@@ -24,12 +24,12 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         this.vC = vC;
         sC = spC;
         spielfelder = new Feld[4][10];
-        erzeugeFelder();
         naechsterButton = new RotationsButton(750, 600, "Nächster", 40, 100, vC, sC);
         namen = new String[4][10];
         preise = new int[4][10];
         setzeStraßennamen();
         setPreis();
+        erzeugeFelder();
         vC.register(naechsterButton, 2);
         vC.draw(naechsterButton, 2);
     }
