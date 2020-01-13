@@ -21,6 +21,9 @@ public class SpielerControll extends InteractiveGraphicalObject {
     private List<Feld> spielfelder;
     private Wuerfel meineWuerfel;
     private ViewController vC;
+    private String aktuelleStrasse;
+    private boolean kaufOption;
+    private boolean fremdBesitz;
 
 
     public SpielerControll(ProgramController pC, ViewController vC){
@@ -39,7 +42,8 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-
+        drawTool.drawText(700,100, spieler.front().getFarbe());
+        drawTool.drawText(700, 200,spieler.front().getMeinAktuellesFeld().getName());
     }
 
     @Override
@@ -103,5 +107,9 @@ public class SpielerControll extends InteractiveGraphicalObject {
         spieler.enqueue(spieler.front());
         spieler.front().setWuerfe(true);
         spieler.dequeue();
+    }
+
+    private void zeigeAktuelleOptionenAn(){
+
     }
 }

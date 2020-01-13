@@ -52,6 +52,7 @@ public class ProgramController {
         spielfeldControll = new SpielfeldControll(spielerControll, viewController);
         spielerControll = new SpielerControll(this, viewController);
         viewController.register(spielerControll, 2);
+        viewController.draw(spielerControll, 2);
         spielfeldControll.setSpielerControll(spielerControll);
         viewController.draw(spielfeldControll, 2);
         viewController.showScene(1);
