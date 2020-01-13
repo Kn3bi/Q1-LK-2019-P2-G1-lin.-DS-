@@ -14,7 +14,7 @@ public class Feld extends GraphicalObject {
     private String name;
     private int preis;
     private boolean inBesitz;
-    private Spieler besitzer;
+    protected Spieler besitzer;
 
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
@@ -29,6 +29,7 @@ public class Feld extends GraphicalObject {
         sichtbarkeitg =0;
         sichtbarkeitgr =0;
         sichtbarkeitr =0;
+        besitzer = null;
     }
 
     @Override
@@ -78,5 +79,9 @@ public class Feld extends GraphicalObject {
 
     public String getName(){
         return name;
+    }
+
+    public Spieler getBesitzer(){
+        return besitzer;
     }
 }

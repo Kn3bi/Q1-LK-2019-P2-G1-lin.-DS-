@@ -8,20 +8,25 @@ public class Spieler {
     private String farbe;
     private List<Feld> spielfelder;
     private boolean wuerfelWurf;
+    private String aktuelleStraße;
 
-    public Spieler(String farbe, List<Feld> list, boolean wurf){
+    public Spieler(String farbe, List<Feld> list, boolean wurf/*String aktuelleStraße*/){
         wuerfelWurf = wurf;
         spielfelder = new List<>();
         spielfelderBefuellen(list);
         spielfelder.toLast();
         spielfelder.getContent().aufDiesemFeld(farbe);
         this.farbe = farbe;
+        geld = 1500;
+        //this.aktuelleStraße = aktuelleStraße;
 
     }
 
     public int getGeld(){
         return geld;
     }
+
+    public void setGeld(int geld){ this.geld = this.geld - geld; }
 
     public boolean getWuerfe(){
         return wuerfelWurf;
@@ -59,4 +64,5 @@ public class Spieler {
     public String getFarbe() {
         return farbe;
     }
+
 }

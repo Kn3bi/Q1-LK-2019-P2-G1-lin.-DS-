@@ -101,6 +101,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
     public boolean aktuellerSpielerHatWurf(){
         return spieler.front().getWuerfe();
     }
+    public Spieler getAktuellerSpieler() {return spieler.front();}
 
     public void rotiereSpieler(){
         System.out.println("> Die Rotation funktioniert");

@@ -10,7 +10,7 @@ public class Spielbrett extends GraphicalObject {
     private BufferedImage spielplan;
 
     public Spielbrett(){
-        //setNewImage("assets/images/Monopoly/monopoly.jpg");
+        setNewImage("assets/images/Monopoly/monopoly.jpg");
         spielplan = getMyImage();
     }
 
