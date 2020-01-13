@@ -6,6 +6,7 @@ import KAGO_framework.view.DrawTool;
 import my_project.model.Feld;
 import my_project.view.RotationsButton;
 import my_project.view.SzenenButton;
+import my_project.view.Wuerfel;
 
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private ViewController vC;
     private RotationsButton naechsterButton;
     private Feld feld;
+
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
         this.vC = vC;
@@ -136,4 +138,6 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
 
         }
     }
+
+
 }

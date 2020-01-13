@@ -1,5 +1,6 @@
 package my_project.control;
 
+import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
@@ -19,11 +20,14 @@ public class SpielerControll extends InteractiveGraphicalObject {
     private ProgramController pC;
     private List<Feld> spielfelder;
     private Wuerfel meineWuerfel;
+    private ViewController vC;
 
 
-    public SpielerControll(ProgramController pC){
+    public SpielerControll(ProgramController pC, ViewController vC){
         this.pC = pC;
+        this.vC = vC;
         meineWuerfel = new Wuerfel();
+        vC.draw(meineWuerfel, 2);
         spielfelder = new List<>();
         befuelleListe();
         spieler = new Queue<>();
@@ -46,7 +50,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
     @Override
     public void keyPressed(int key) {
         if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()){
-            spieler.front().geheVorwaerts(meineWuerfel.wuerfelnIntern());
+            spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
             spieler.front().setWuerfe(false);
         }
     }

@@ -50,7 +50,7 @@ public class ProgramController {
         anleitung = new Anleitung(viewController);
         viewController.draw(anleitung, 0);
         spielfeldControll = new SpielfeldControll(spielerControll, viewController);
-        spielerControll = new SpielerControll(this);
+        spielerControll = new SpielerControll(this, viewController);
         viewController.register(spielerControll, 2);
         spielfeldControll.setSpielerControll(spielerControll);
         viewController.draw(spielfeldControll, 2);
