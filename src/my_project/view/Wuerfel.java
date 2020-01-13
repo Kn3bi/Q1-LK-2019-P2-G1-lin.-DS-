@@ -16,7 +16,11 @@ public class Wuerfel extends GraphicalObject {
     }
 
     public int wuerfeln(){
-        return wuerfelnIntern();
+        int wuerfelwert = 0;
+        wuerfelnIntern();
+        wuerfelnIntern();
+
+        return 0;
     }
 
     public int wuerfelnIntern(){
