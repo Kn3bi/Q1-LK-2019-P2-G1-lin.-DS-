@@ -76,5 +76,7 @@ public class Feld extends GraphicalObject {
         }
     }
 
-
+    public String getName(){
+        return name;
+    }
 }

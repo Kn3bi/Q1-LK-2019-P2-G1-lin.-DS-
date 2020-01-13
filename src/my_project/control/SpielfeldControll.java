@@ -18,18 +18,18 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private String[][] namen;
     private int[][] preise;
 
-    public SpielfeldControll(SpielerControll spC, ViewController vC,Feld feld){
+    public SpielfeldControll(SpielerControll spC, ViewController vC){
         this.vC = vC;
         sC = spC;
         spielfelder = new Feld[4][10];
-        erzeugeFelder();
         naechsterButton = new RotationsButton(750, 600, "Nächster", 40, 100, vC, sC);
-        vC.register(naechsterButton, 2);
-        vC.draw(naechsterButton, 2);
-        setzeStraßennamen();
-        setPreis();
         namen = new String[4][10];
         preise = new int[4][10];
+        setzeStraßennamen();
+        setPreis();
+        erzeugeFelder();
+        vC.register(naechsterButton, 2);
+        vC.draw(naechsterButton, 2);
     }
 
 
@@ -238,7 +238,9 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     public int getPreis(int i,int j){
         return preise[i][j];
     }
+
     public String getNamen(int i,int j){
+        System.out.println("Hello, world");
         return namen[i][j];
     }
 }

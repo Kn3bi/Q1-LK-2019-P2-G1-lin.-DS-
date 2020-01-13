@@ -37,7 +37,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.drawText(700,100, spieler.front().getFarbe());
-        drawTool.drawText(700, 200,spieler.front().getMeinAktuellesFeld().getNamen());
+        drawTool.drawText(700, 200,spieler.front().getMeinAktuellesFeld().getName());
     }
 
     @Override
