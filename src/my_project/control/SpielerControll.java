@@ -1,6 +1,5 @@
 package my_project.control;
 
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
@@ -11,7 +10,6 @@ import my_project.view.Wuerfel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 public class SpielerControll extends InteractiveGraphicalObject {
 
@@ -19,6 +17,9 @@ public class SpielerControll extends InteractiveGraphicalObject {
     private ProgramController pC;
     private List<Feld> spielfelder;
     private Wuerfel meineWuerfel;
+    private String aktuelleStrasse;
+    private boolean kaufOption;
+    private boolean fremdBesitz;
 
 
     public SpielerControll(ProgramController pC){
@@ -35,7 +36,8 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-
+        drawTool.drawText(700,100, spieler.front().getFarbe());
+        drawTool.drawText(700, 200,spieler.front().getMeinAktuellesFeld().getNamen());
     }
 
     @Override
@@ -48,6 +50,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
         if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()){
             spieler.front().geheVorwaerts(meineWuerfel.wuerfelnIntern());
             spieler.front().setWuerfe(false);
+            zeigeAktuelleOptionenAn();
         }
     }
 
@@ -99,5 +102,9 @@ public class SpielerControll extends InteractiveGraphicalObject {
         spieler.enqueue(spieler.front());
         spieler.front().setWuerfe(true);
         spieler.dequeue();
+    }
+
+    private void zeigeAktuelleOptionenAn(){
+
     }
 }

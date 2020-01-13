@@ -13,6 +13,8 @@ public class Feld extends GraphicalObject {
     private String[][] namen;
     private String name;
     private int preis;
+    private boolean inBesitz;
+    private Spieler besitzer;
 
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
@@ -122,7 +124,19 @@ public class Feld extends GraphicalObject {
         namen[3][9] = "Schloßallee";
     }
 
-    public String[][] getNamen(){
+    public String[][] getAktuellenNamen(){
         return namen;
+    }
+
+    public String getNamen(){
+        return name;
+    }
+
+    public int getPreis(){
+        return preis;
+    }
+
+    public Spieler getBesitzer(){
+        return besitzer;
     }
 }

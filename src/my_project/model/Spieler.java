@@ -1,7 +1,6 @@
 package my_project.model;
 
 import KAGO_framework.model.abitur.datenstrukturen.List;
-import my_project.view.Felder;
 
 public class Spieler {
     private int geld;
@@ -51,5 +50,13 @@ public class Spieler {
             spielfelder.append(list.getContent());
             list.next();
         }
+    }
+
+    public Feld getMeinAktuellesFeld(){
+        return spielfelder.getContent();
+    }
+
+    public String getFarbe() {
+        return farbe;
     }
 }
