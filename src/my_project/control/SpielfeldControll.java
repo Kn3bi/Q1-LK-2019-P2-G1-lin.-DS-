@@ -30,7 +30,6 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         preise = new int[4][10];
         setzeStraßennamen();
         setPreis();
-        erzeugeFelder();
         vC.register(naechsterButton, 2);
         vC.draw(naechsterButton, 2);
     }
