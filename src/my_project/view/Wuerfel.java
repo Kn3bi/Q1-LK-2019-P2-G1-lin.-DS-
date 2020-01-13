@@ -9,19 +9,18 @@ public class Wuerfel extends GraphicalObject {
     private BufferedImage currentWuerfel01;
     private BufferedImage currentWuerfel02;
     private BufferedImage[] wuerfel;
+    private int zahlEins;
+    private int zahlZwei;
 
-    public Wuerfel(){
 
-
+    public int wuerfel(){
+        zahlEins=wuerfelnIntern();
+        zahlZwei=wuerfelnIntern();
+        int ergebnis = zahlEins + zahlZwei;
+        return ergebnis;
     }
 
-    public int wuerfeln(){
-        int wuerfelwert = 0;
-        wuerfelnIntern();
-        wuerfelnIntern();
 
-        return 0;
-    }
 
     public int wuerfelnIntern(){
         int augzahl = 1+ (int)(Math.random()*6);
