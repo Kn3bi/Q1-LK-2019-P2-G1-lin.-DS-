@@ -4,7 +4,7 @@ import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.control.SpielfeldControll;
 
-public class Feld extends GraphicalObject {
+public class Feld extends AllgemeinesFeld {
 
     private Gebaude[][] meineGebaude;
     private int sichtbarkeitr;
@@ -18,6 +18,7 @@ public class Feld extends GraphicalObject {
 
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
+        super(breite,hoehe,x,y,name);
         width = breite;
         height = hoehe;
         this.x = x;
@@ -32,49 +33,8 @@ public class Feld extends GraphicalObject {
         besitzer = null;
     }
 
-    @Override
-    public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(0,0,0,255);
-        drawTool.drawRectangle(x, y, width, height);
-        drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
-        drawTool.drawFilledCircle(x+20, y+40, 20);
-        drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
-        drawTool.drawFilledCircle(x+40, y+40, 20);
-        drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
-        drawTool.drawFilledCircle(x+20, y+60, 20);
-        drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
-        drawTool.drawFilledCircle(x+40, y+60, 20);
-    }
-
-    @Override
     public void update(double dt) {
 
-    }
-
-    public void aufDiesemFeld(String farbe){
-        if(farbe.equals("rot")){
-            sichtbarkeitr = 255;
-        }else if(farbe.equals("grün")){
-            sichtbarkeitgr = 255;
-        }else if(farbe.equals("blau")){
-            sichtbarkeitb = 255;
-        }else if(farbe.equals("gelb")){
-            sichtbarkeitg = 255;
-        }
-    }
-
-    public void diesesFeldVerlassen(String farbe){
-        if(farbe.equals("rot")){
-            System.out.println("> Sichtbarkeit auf dem aktuellen FEld wird auf Null gesetzt");
-            sichtbarkeitr = 0;
-            System.out.println(sichtbarkeitr);
-        }else if(farbe.equals("grün")){
-            sichtbarkeitgr = 0;
-        }else if(farbe.equals("blau")){
-            sichtbarkeitb = 0;
-        }else if(farbe.equals("gelb")){
-            sichtbarkeitg = 0;
-        }
     }
 
     public String getName(){

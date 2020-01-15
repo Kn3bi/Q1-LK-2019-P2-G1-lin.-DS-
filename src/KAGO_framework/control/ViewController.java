@@ -360,7 +360,8 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (currentlyPressedKeys.contains(e.getKeyCode()))currentlyPressedKeys.remove(new Integer(e.getKeyCode()));
+        if (currentlyPressedKeys.contains(e.getKeyCode()))
+            currentlyPressedKeys.remove(Integer.valueOf(e.getKeyCode()));
         Iterator<Interactable> iterator = scenes.get(currentScene).interactables.iterator();
         while (iterator.hasNext()){
             Interactable tmpInteractable = iterator.next();

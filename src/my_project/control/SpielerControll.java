@@ -1,7 +1,6 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
@@ -12,7 +11,6 @@ import my_project.view.Wuerfel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 public class SpielerControll extends InteractiveGraphicalObject {
 
@@ -38,6 +36,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
         spieler.enqueue(new Spieler("grün", spielfelder, true));
         spieler.enqueue(new Spieler("gelb", spielfelder, true));
         spieler.enqueue(new Spieler("blau", spielfelder, true));
+
     }
 
     @Override
@@ -109,6 +108,10 @@ public class SpielerControll extends InteractiveGraphicalObject {
         spieler.front().setWuerfe(true);
         spieler.dequeue();
     }
+
+    /*public void geheInsGefängnis(){
+        spieler.front().setMeinAktuellesFeld("Gefängnis")
+    }*/
 
     private void zeigeAktuelleOptionenAn(){
 

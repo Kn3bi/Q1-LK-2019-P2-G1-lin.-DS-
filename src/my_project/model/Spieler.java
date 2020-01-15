@@ -61,6 +61,12 @@ public class Spieler {
         return spielfelder.getContent();
     }
 
+    public void setMeinAktuellesFeld(Feld feld){
+        while(spielfelder.getContent() != feld){
+            spielfelder.next();
+        }
+    }
+
     public String getFarbe() {
         return farbe;
     }
