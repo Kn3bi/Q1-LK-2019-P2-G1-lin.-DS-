@@ -58,6 +58,11 @@ public class SpielerControll extends InteractiveGraphicalObject {
         }
     }
 
+    public void bezahleMiete(){
+        spieler.front().setGeld(spieler.front().getMeinAktuellesFeld().getMiete());
+        spieler.front().getMeinAktuellesFeld().getBesitzer().setGeld(-spieler.front().getMeinAktuellesFeld().getMiete());
+    }
+
     @Override
     public void keyReleased(int key) {
 

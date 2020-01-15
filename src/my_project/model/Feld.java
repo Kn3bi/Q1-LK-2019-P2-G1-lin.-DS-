@@ -2,7 +2,6 @@ package my_project.model;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
-import my_project.control.SpielfeldControll;
 
 public class Feld extends AllgemeinesFeld {
 
@@ -15,6 +14,8 @@ public class Feld extends AllgemeinesFeld {
     private int preis;
     private boolean inBesitz;
     protected Spieler besitzer;
+    protected int miete;
+    private int haeuser;
 
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
@@ -31,6 +32,8 @@ public class Feld extends AllgemeinesFeld {
         sichtbarkeitgr =0;
         sichtbarkeitr =0;
         besitzer = null;
+        miete = berechneMiete();
+        haeuser = 0;
     }
 
     public void update(double dt) {
@@ -43,5 +46,34 @@ public class Feld extends AllgemeinesFeld {
 
     public Spieler getBesitzer(){
         return besitzer;
+    }
+
+    public boolean istInBesitz(){
+        return inBesitz;
+    }
+
+    public int getPreis(){
+        return preis;
+    }
+
+    public int berechneMiete(){
+        int m =0;
+        if(haeuser==0){
+            m = preis/4;
+        }else if(haeuser==1){
+            m = (preis/4)*2;
+        }else if(haeuser==2){
+            m = (preis/4)*3;
+        }else if(haeuser==3){
+            m = preis;
+        }else if(haeuser == 4){
+            m = (preis/4)*5;
+        }else if(haeuser==5){
+            m = preis*2;
+        }
+        return m;
+    }
+    public int getMiete(){
+        return miete;
     }
 }
