@@ -61,7 +61,7 @@ public class Feld extends AllgemeinesFeld {
             drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+30, y+5, 8, 8);
-        }else{
+        }else if(haeuser == 4){
             drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+30, y+5, 8, 8);
