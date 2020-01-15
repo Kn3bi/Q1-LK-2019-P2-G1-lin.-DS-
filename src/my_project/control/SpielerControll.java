@@ -1,7 +1,6 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
@@ -12,7 +11,6 @@ import my_project.view.Wuerfel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 public class SpielerControll extends InteractiveGraphicalObject {
 
@@ -57,6 +55,11 @@ public class SpielerControll extends InteractiveGraphicalObject {
             spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
             spieler.front().setWuerfe(false);
         }
+    }
+
+    public void bezahleMiete(){
+        spieler.front().setGeld(spieler.front().getMeinAktuellesFeld().getMiete());
+        spieler.front().getMeinAktuellesFeld().getBesitzer().setGeld(-spieler.front().getMeinAktuellesFeld().getMiete());
     }
 
     @Override

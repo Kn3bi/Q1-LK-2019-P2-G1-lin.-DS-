@@ -18,7 +18,6 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private RotationsButton naechsterButton;
     private String[][] namen;
     private int[][] preise;
-    private Feld feld;
 
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
@@ -102,11 +101,6 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         sC.rotiereSpieler();
     }
 
-    public void bezahleMiete(){
-       if(feld.getBesitzer() !=  sC.getAktuellerSpieler()){
-          // sC.getAktuellerSpieler().setGeld(getPreis(getAktuellesFeld()));
-       }
-    }
 
     private void erzeugeFelder(){
         for(int i = 0; i < spielfelder[0].length; i++){
@@ -201,7 +195,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         preise[0][0] = 60;
         preise[0][1] = 0;
         preise[0][2] = 60;
-        preise[0][3] = 200;
+        preise[0][3] = 0;
         preise[0][4] = 200;
         preise[0][5] = 100;
         preise[0][6] = 0;
