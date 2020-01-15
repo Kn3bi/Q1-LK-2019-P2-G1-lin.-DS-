@@ -66,9 +66,13 @@ public class Spieler {
             return spielfelder.getContent();
         }
 
-        public void setMeinAktuellesFeld (Feld feld){
+        public void setMeinAktuellesFeld (AllgemeinesFeld feld){
             while (spielfelder.getContent() != feld) {
-                spielfelder.next();
+                if(spielfelder.hasAccess()){
+                    spielfelder.next();
+                }else{
+                    spielfelder.toFirst();
+                }
             }
         }
 

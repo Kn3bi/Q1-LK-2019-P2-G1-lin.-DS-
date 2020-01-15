@@ -91,6 +91,11 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist
                 if (spieler.front().getAktuellesFeld().getName().equals("Gehe ins Gefängnis")) {
                     spieler.front().setImGefängnis(true);
+                    spielfelder.toFirst();
+                    while(!spielfelder.getContent().getName().equals("Gefängnis")) spielfelder.next();
+                    spieler.front().getAktuellesFeld().diesesFeldVerlassen(spieler.front().getFarbe());
+                    spieler.front().setMeinAktuellesFeld(spielfelder.getContent());
+                    spieler.front().getAktuellesFeld().aufDiesemFeld(spieler.front().getFarbe());
 
                 } else if (spieler.front().getAktuellesFeld() instanceof Spezialfeld) {
                     //Platz für Spezialfelder
