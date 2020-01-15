@@ -10,6 +10,9 @@ public class Spieler {
     private boolean wuerfelWurf;
     private String aktuelleStraße;
 
+    private Boolean imGefängnis;
+    private int zeitImGefängnis;
+
     public Spieler(String farbe, List<Feld> list, boolean wurf/*String aktuelleStraße*/){
         wuerfelWurf = wurf;
         spielfelder = new List<>();
@@ -19,6 +22,8 @@ public class Spieler {
         this.farbe = farbe;
         geld = 1500;
         //this.aktuelleStraße = aktuelleStraße;
+        imGefängnis=false;
+        zeitImGefängnis=0;
 
     }
 
@@ -57,6 +62,7 @@ public class Spieler {
         }
     }
 
+
     public Feld getMeinAktuellesFeld(){
         return spielfelder.getContent();
     }
@@ -89,5 +95,20 @@ public class Spieler {
 
     public String getAktuelleStraße() {
         return aktuelleStraße;
+    }
+    public Boolean getImGefängnis() {
+        return imGefängnis;
+    }
+
+    public void setImGefängnis(Boolean imGefängnis) {
+        this.imGefängnis = imGefängnis;
+    }
+
+    public int getZeitImGefängnis() {
+        return zeitImGefängnis;
+    }
+
+    public void setZeitImGefängnis(int zeitImGefängnis) {
+        this.zeitImGefängnis = zeitImGefängnis;
     }
 }

@@ -71,4 +71,12 @@ public class Wuerfel extends GraphicalObject {
     public void update(double dt) {
 
     }
+
+    public int getZahlEins() {
+        return zahlEins;
+    }
+
+    public int getZahlZwei() {
+        return zahlZwei;
+    }
 }
