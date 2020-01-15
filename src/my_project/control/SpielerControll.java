@@ -7,6 +7,7 @@ import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.view.DrawTool;
 import my_project.model.AllgemeinesFeld;
 import my_project.model.Feld;
+import my_project.model.Spezialfeld;
 import my_project.model.Spieler;
 import my_project.view.Wuerfel;
 
@@ -61,6 +62,11 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
             }
         }
+        if(spieler.front().getImGefängnis()){
+            drawTool.drawText(700,300,"Drücke >b<, um 50$ zu bezahlen " +
+                    "und aus dem Gefängnis zu entkommen");
+        }
+
     }
 
     @Override
@@ -70,18 +76,37 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     @Override
     public void keyPressed(int key) {
-        if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()){
-            spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
-            spieler.front().setWuerfe(false);
-            if(spieler.front().getAktuellesFeld() instanceof Feld) {
-                if (((Feld)spieler.front().getAktuellesFeld()).isInBesitz() && ((Feld)spieler.front().getAktuellesFeld()).getBesitzer() != spieler.front()) {
-                    fremdBesitz = true;
-                } else if (((Feld)spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
+        if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()) {
+            //prüft, ob sich der Spieler in einem Gefänfgnis befindet
+            if(spieler.front().getImGefängnis()){
+                //Diese Überprüfung wird aufgerufen, bevor der Spieler die Möglichkeit hat,
+                // weiterzugehen, da die Wirkung des Gefägnis, stehen zu bleiben,
+                // vor dem Zug eintritt.
+                versucheAusDemGefängnisZuEntkommen(spieler.front(),false);
+                spieler.front().setWuerfe(false);
+            }
+            if(!spieler.front().getImGefängnis()) {
+                spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
+                spieler.front().setWuerfe(false);
+                //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist
+                if (spieler.front().getAktuellesFeld().getName().equals("Gehe ins Gefängnis")) {
+                    spieler.front().setImGefängnis(true);
 
-                } else if (!((Feld)spieler.front().getAktuellesFeld()).isInBesitz()) {
+                } else if(spieler.front().getAktuellesFeld() instanceof Spezialfeld){
+                    //Platz für Spezialfelder
+                }else if (spieler.front().getAktuellesFeld() instanceof Feld) {
+                if (((Feld) spieler.front().getAktuellesFeld()).isInBesitz() && ((Feld) spieler.front().getAktuellesFeld()).getBesitzer() != spieler.front()) {
+                    fremdBesitz = true;
+                } else if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
+
+                } else if (!((Feld) spieler.front().getAktuellesFeld()).isInBesitz()) {
                     kaufOption = true;
                 }
             }
+        }
+        if(key==KeyEvent.VK_B){
+            versucheAusDemGefängnisZuEntkommen(spieler.front(),true);
+
         }
         if(!spieler.front().getWuerfe()) {
             if (spieler.front().getAktuellesFeld() instanceof Feld) {
@@ -96,6 +121,44 @@ public class SpielerControll extends InteractiveGraphicalObject {
                         spieler.front().setGeld(-(((Feld) spieler.front().getAktuellesFeld()).getHauspreis()));
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Diese Methode geht alle Möglichkeiten für einen Spieler durch,
+     * aus dem Gefängnis zu gehen.
+     * Diese Überprüfung wird aufgerufen, bevor der Spieler die Möglichkeit hat, weiterzugehen,
+     * da die Wirkung des Gefägnis, stehen zu bleiben, vor dem Zug eintritt.
+     * @param spieler ein Spieler, der im Gefängnis sitzt
+     * @param raus die Erlabnis des Spielers,
+     *            aus dem Gefängnis gegen einen Geldbetrag raus zu gehen.
+     */
+
+    public void versucheAusDemGefängnisZuEntkommen(Spieler spieler, boolean raus){
+        //prüft, ob der spieler exiestiert und im Gefängnis ist,
+        // es müssen auch schon Würfel exiestieren
+        if(spieler!=null && spieler.getImGefängnis() && meineWuerfel!=null) {
+            fremdBesitz=false;
+            kaufOption=false;
+            // erhöht die Zeit im Gefängnis um eine Runde
+            spieler.setZeitImGefängnis(spieler.getZeitImGefängnis()+1);
+            if(raus){  // Falls die Erlabnis erteilt wurde(durch drücken von der Taste b )
+                // , raus zu gehen --> Gehe raus und bezahle
+                spieler.setGeld(spieler.getGeld() - 50);
+                spieler.setImGefängnis(false);
+                spieler.setZeitImGefängnis(0);
+            }else if (meineWuerfel.getZahlEins() == meineWuerfel.getZahlZwei()
+                    && spieler.getZeitImGefängnis() != 1) {
+                //Falls Pasch gewürfelt --> gehe raus
+                spieler.setImGefängnis(false);
+                spieler.setZeitImGefängnis(0);
+
+            } else if (spieler.getZeitImGefängnis() == 3) {
+                // Falls schon drei Runden im Gefängnis --> gehe raus
+                spieler.setGeld(spieler.getGeld() - 50);
+                spieler.setImGefängnis(false);
+                spieler.setZeitImGefängnis(0);
             }
         }
     }
@@ -157,9 +220,6 @@ public class SpielerControll extends InteractiveGraphicalObject {
         spieler.enqueue(spieler.front());
         spieler.front().setWuerfe(true);
         spieler.dequeue();
-        if(fremdBesitz){
-            bezahleMiete();
-        }
     }
 
     /*public void geheInsGefängnis(){
