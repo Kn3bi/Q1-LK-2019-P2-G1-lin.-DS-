@@ -1,8 +1,6 @@
 package my_project.model;
 
-import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
-import my_project.control.SpielfeldControll;
 
 public class Feld extends AllgemeinesFeld {
 
@@ -12,7 +10,7 @@ public class Feld extends AllgemeinesFeld {
     private int sichtbarkeitb;
     private int sichtbarkeitgr;
     private int haeuser;
-    private int sichtbarkeitHotel;
+    private boolean hotel;
     private String name;
     private int preis;
     private boolean inBesitz;
@@ -34,24 +32,16 @@ public class Feld extends AllgemeinesFeld {
         sichtbarkeitgr =0;
         sichtbarkeitr =0;
         besitzer = null;
+        inBesitz = false;
         miete = berechneMiete();
         haeuser = 0;
     }
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(0,0,0,255);
-        drawTool.drawRectangle(x, y, width, height);
-        drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
-        drawTool.drawFilledCircle(x+20, y+40, 20);
-        drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
-        drawTool.drawFilledCircle(x+40, y+40, 20);
-        drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
-        drawTool.drawFilledCircle(x+20, y+60, 20);
-        drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
-        drawTool.drawFilledCircle(x+40, y+60, 20);
+        super.draw(drawTool);
 
-        drawTool.setCurrentColor(0,255,0,255);
+        drawTool.setCurrentColor(0,180,0,255);
         if(haeuser == 1){
             drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
         }else if(haeuser == 2){
@@ -66,9 +56,12 @@ public class Feld extends AllgemeinesFeld {
             drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+30, y+5, 8, 8);
             drawTool.drawFilledRectangle(x+40, y+5, 8, 8);
+        }else if(hotel){
+            drawTool.setCurrentColor(255,0,0,255);
+            drawTool.drawFilledRectangle(x +10, y+5, 15,15);
         }
 
-        //if(sichtbarkeitHotel)
+        //if(hotel)
     }
 
     @Override
@@ -76,31 +69,7 @@ public class Feld extends AllgemeinesFeld {
 
     }
 
-    public void aufDiesemFeld(String farbe){
-        if(farbe.equals("rot")){
-            sichtbarkeitr = 255;
-        }else if(farbe.equals("grün")){
-            sichtbarkeitgr = 255;
-        }else if(farbe.equals("blau")){
-            sichtbarkeitb = 255;
-        }else if(farbe.equals("gelb")){
-            sichtbarkeitg = 255;
-        }
-    }
 
-    public void diesesFeldVerlassen(String farbe){
-        if(farbe.equals("rot")){
-            System.out.println("> Sichtbarkeit auf dem aktuellen FEld wird auf Null gesetzt");
-            sichtbarkeitr = 0;
-            System.out.println(sichtbarkeitr);
-        }else if(farbe.equals("grün")){
-            sichtbarkeitgr = 0;
-        }else if(farbe.equals("blau")){
-            sichtbarkeitb = 0;
-        }else if(farbe.equals("gelb")){
-            sichtbarkeitg = 0;
-        }
-    }
 
     public String getName(){
         return name;
@@ -163,5 +132,44 @@ public class Feld extends AllgemeinesFeld {
 
     public int getMiete() {
         return miete;
+    }
+
+    public int getHauspreis(){
+        if(haeuser ==0){
+            return preis/4;
+        }else if(haeuser == 1){
+            return preis/3;
+        }else if(haeuser == 2){
+            return preis/2;
+        }else if(haeuser == 3){
+            return preis;
+        }else if(haeuser == 4){
+            return preis*2;
+        }
+        return 0;
+    }
+
+    public int getHaeuseranzahl(){
+        return haeuser;
+    }
+
+    public void kaufen(Spieler s){
+        besitzer = s;
+        inBesitz = true;
+    }
+
+    public void setHaeuserAnzahl(){
+        if(haeuser ==0){
+            haeuser = 1;
+        }else if(haeuser == 1){
+            haeuser = 2;
+        }else if(haeuser == 2){
+            haeuser = 3;
+        }else if(haeuser == 3){
+            haeuser = 4;
+        }else if(haeuser == 4){
+            haeuser = 0;
+            hotel = true;
+        }
     }
 }

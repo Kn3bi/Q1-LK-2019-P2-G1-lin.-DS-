@@ -3,13 +3,13 @@ package my_project.control;
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
-import my_project.model.Feld;
+import my_project.model.*;
 import my_project.view.RotationsButton;
 
 import java.awt.event.MouseEvent;
 
 public class SpielfeldControll extends InteractiveGraphicalObject {
-    private Feld[][] spielfelder;
+    private AllgemeinesFeld[][] spielfelder;
     private SpielerControll sC;
     private ViewController vC;
     private RotationsButton naechsterButton;
@@ -20,7 +20,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     public SpielfeldControll(SpielerControll spC, ViewController vC){
         this.vC = vC;
         sC = spC;
-        spielfelder = new Feld[4][10];
+        spielfelder = new AllgemeinesFeld[4][10];
         naechsterButton = new RotationsButton(750, 600, "Nächster", 40, 100, vC, sC);
         namen = new String[4][10];
         preise = new int[4][10];
@@ -81,7 +81,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
 
     }
 
-    public Feld[][] getSpielfelder(){
+    public AllgemeinesFeld[][] getSpielfelder(){
         return spielfelder;
     }
 
@@ -100,92 +100,67 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
 
 
     private void erzeugeFelder(){
-        for(int i = 0; i < spielfelder[0].length; i++){
-            if(i != 9){
-                spielfelder[0][i] = new Feld(58, 90, 550-i*58, 610,getNamen(0,i),getPreis(0,i));
-                vC.draw(spielfelder[0][i], 2);
-            }else{
-                spielfelder[0][i] = new Feld(90, 90, 550-(i-1)*58-90, 610, getNamen(0,i),getPreis(0,i));
-                vC.draw(spielfelder[0][i], 2);
-            }
 
-        }
-        for(int i = 0; i < spielfelder[1].length; i++){
-            if(i != 9){
-                spielfelder[1][i] = new Feld(90, 58, 0, 550-58*i,getNamen(1,i),getPreis(1,i));
-                vC.draw(spielfelder[1][i], 2);
-            }else{
-                spielfelder[1][i] = new Feld(90, 90, 0, 550-58*(i-1)-90,getNamen(1,i),getPreis(1,i));
-                vC.draw(spielfelder[1][i], 2);
-            }
+        spielfelder[0][0] = new AllgemeinesFeld(90, 90, 608, 610,"Los!");
+        spielfelder[0][1] = new Feld(58, 90, 608-58, 610,"Badstraße",100);
+        spielfelder[0][2] = new Ereignisfeld(58, 90, 608-58*2, 610,"Gemeinschaftsfeld");
+        spielfelder[0][3] = new Feld(58, 90, 608-58*3, 610,"Turmstraße",100);
+        spielfelder[0][4] = new Einkommenssteuer(58, 90, 608-58*4, 610,"Einkommensteuer");
+        spielfelder[0][5] = new Bahnhof(58, 90, 608-58*5, 610,"Südbahnhof");
+        spielfelder[0][6] = new Feld(58, 90, 608-58*6, 610,"Chausseestraße",100);
+        spielfelder[0][7] = new Ereignisfeld(58, 90, 608-58*7, 610,"Ereignisfeld");
+        spielfelder[0][8] = new Feld(58, 90, 608-58*8, 610,"Elisenstraße", 100);
+        spielfelder[0][9] = new Feld(58, 90, 608-58*9, 610,"Postsraße",100);
 
-        }
-        for(int i = 0; i < spielfelder[2].length; i++){
-            if(i != 9){
-                spielfelder[2][i] = new Feld(58, 90, 90+58*i, 0,getNamen(2,i),getPreis(2,i));
-                vC.draw(spielfelder[2][i], 2);
-            }else{
-                spielfelder[2][i] = new Feld(90, 90, 90+58*i, 0,getNamen(2,i),getPreis(2,i));
-                vC.draw(spielfelder[2][i], 2);
-            }
+        spielfelder[1][0] = new Gefaegnis(90, 90, 0, 610,"Gefängnis");
+        spielfelder[1][1] = new Feld(90, 58, 0, 610-58,"Seestraße",100);
+        spielfelder[1][2] = new Versorgungswerke(90, 58, 0, 610-58*2,"Elektrizitätswerk");
+        spielfelder[1][3] = new Feld(90, 58, 0, 610-58*3,"Hafenstraße",100);
+        spielfelder[1][4] = new Feld(90, 58, 0, 610-58*4,"Neue Straße",0);
+        spielfelder[1][5] = new Bahnhof(90, 58, 0, 610-58*5,"Westbahnhof");
+        spielfelder[1][6] = new Feld(90, 58, 0, 610-58*6,"Münchner Straße", 0);
+        spielfelder[1][7] = new Ereignisfeld(90, 58, 0, 610-58*7,"Gemeinschaftsfeld");
+        spielfelder[1][8] = new Feld(90, 58, 0, 610-58*8,"Wiener Straße", 0);
+        spielfelder[1][9] = new Feld(90, 58, 0, 610-58*9,"Berliner Straße",0);
 
-        }
-        for(int i = 0; i < spielfelder[3].length; i++){
-            if(i != 9){
-                spielfelder[3][i] = new Feld(90, 58, 610, 90+58*i,getNamen(3,i),getPreis(3,i));
-                vC.draw(spielfelder[3][i], 2);
-            }else{
-                spielfelder[3][i] = new Feld(90, 90, 610, 90+58*i,getNamen(3,i),getPreis(3,i));
-                vC.draw(spielfelder[3][i], 2);
-            }
+        spielfelder[2][0] = new AllgemeinesFeld(90, 90, 0, 0,"Frei Parken");
+        spielfelder[2][1] = new Feld(58, 90, 90, 0,"Theaterstraße",0);
+        spielfelder[2][2] = new Ereignisfeld(58, 90, 90+58, 0,"Ereignisfeld");
+        spielfelder[2][3] = new Feld(58, 90, 90+58*2, 0,"Museumsstraße",0);
+        spielfelder[2][4] = new Feld(58, 90, 90+58*3, 0,"Opernplatz",0);
+        spielfelder[2][5] = new Bahnhof(58, 90, 90+58*4, 0,"Aachen Schanz Bahnhof");
+        spielfelder[2][6] = new Feld(58, 90, 90+58*5, 0,"Lessingstraße",0);
+        spielfelder[2][7] = new Feld(58, 90, 90+58*6, 0,"Schillerstraße",0);
+        spielfelder[2][8] = new Versorgungswerke(58, 90, 90+58*7, 0,"Wasserwerk");
+        spielfelder[2][9] = new Feld(58, 90, 90+58*8, 0,"Goethestraße",0);
 
+        spielfelder[3][0] = new AllgemeinesFeld(90, 90, 610, 0,"Gehe ins Gefängnis");
+        spielfelder[3][1] = new Feld(90, 58, 610, 90,"Rathausplatz",0);
+        spielfelder[3][2] = new Feld(90, 58, 610, 90+58*1,"Hauptstraße", 0);
+        spielfelder[3][3] = new Ereignisfeld(90, 58, 610, 90+58*2,"Gemeinschaftsfeld");
+        spielfelder[3][4] = new Feld(90, 58, 610, 90+58*3,"Bahnhofstraße",0);
+        spielfelder[3][5] = new Bahnhof(90, 58, 610, 90+58*4,"Hauptbahnhof");
+        spielfelder[3][6] = new Ereignisfeld(90, 58, 610, 90+58*5,"Ereignisfeld");
+        spielfelder[3][7] = new Feld(90, 58, 610, 90+58*6,"Parkstraße",0);
+        spielfelder[3][8] = new Einkommenssteuer(90, 58, 610, 90+58*7,"Zusatzsteuer");
+        spielfelder[3][9] = new Feld(90, 58, 610, 90+58*8,"Schloßallee",0);
+
+        for(int i = 0; i < spielfelder.length; i++){
+            for(int j = 0; j < spielfelder[i].length; j++){
+                vC.draw(spielfelder[i][j], 2);
+            }
         }
+
+
+
     }
 
     public void setzeStraßennamen(){
-        namen[0][0] = "Badstraße";
-        namen[0][1] = "Gemeinschaftsfeld";
-        namen[0][2] = "Turmstraße";
-        namen[0][3] = "Einkommensteuer";
-        namen[0][4] = "Südbahnhof";
-        namen[0][5] = "Chausseestraße";
-        namen[0][6] = "Ereignisfeld";
-        namen[0][7] = "Elisenstraße";
-        namen[0][8] = "Postsraße";
-        namen[0][9] = "Gefängnis";
 
-        namen[1][0] = "Seestraße";
-        namen[1][1] = "Elektrizitätswerk";
-        namen[1][2] = "Hafenstraße";
-        namen[1][3] = "Neue Straße";
-        namen[1][4] = "Westbahnhof";
-        namen[1][5] = "Münchner Straße";
-        namen[1][6] = "Gemeinschaftsfeld";
-        namen[1][7] = "Wiener Straße";
-        namen[1][8] = "Berliner Straße";
-        namen[1][9] = "Frei Parken";
 
-        namen[2][0] = "Theaterstraße";
-        namen[2][1] = "Ereignisfeld";
-        namen[2][2] = "Museumsstraße";
-        namen[2][3] = "Opernplatz";
-        namen[2][4] = "Nordbahnhof";
-        namen[2][5] = "Lessingstraße";
-        namen[2][6] = "Schillerstraße";
-        namen[2][7] = "Wasserwerk";
-        namen[2][8] = "Goethestraße";
-        namen[2][9] = "Gehe ins Gefängnis";
 
-        namen[3][0] = "Rathausplatz";
-        namen[3][1] = "Hauptstraße";
-        namen[3][2] = "Gemeinschaftsfeld";
-        namen[3][3] = "Bahnhofstraße";
-        namen[3][4] = "Hauptbahnhof";
-        namen[3][5] = "Ereignisfeld";
-        namen[3][6] = "Parkstraße";
-        namen[3][7] = "Zusatzsteuer";
-        namen[3][8] = "Schloßallee";
-        namen[3][9] = "LOS";
+
+
     }
 
     public void setPreis(){

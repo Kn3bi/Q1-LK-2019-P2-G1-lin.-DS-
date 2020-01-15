@@ -1,6 +1,7 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import my_project.model.AllgemeinesFeld;
 import my_project.model.Feld;
 import my_project.view.Anleitung;
 import my_project.view.Spielbrett;
@@ -82,7 +83,7 @@ public class ProgramController {
         viewController.showScene(i);
     }
 
-    public Feld[][] getSpielfelder(){
+    public AllgemeinesFeld[][] getSpielfelder(){
         return spielfeldControll.getSpielfelder();
     }
 

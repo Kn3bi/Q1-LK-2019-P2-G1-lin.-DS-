@@ -6,15 +6,15 @@ public class Spieler {
     private int geld;
     private String name;
     private String farbe;
-    private List<Feld> spielfelder;
+    private List<AllgemeinesFeld> spielfelder;
     private boolean wuerfelWurf;
     private String aktuelleStraße;
 
-    public Spieler(String farbe, List<Feld> list, boolean wurf/*String aktuelleStraße*/){
+    public Spieler(String farbe, List<AllgemeinesFeld> list, boolean wurf/*String aktuelleStraße*/){
         wuerfelWurf = wurf;
         spielfelder = new List<>();
         spielfelderBefuellen(list);
-        spielfelder.toLast();
+        spielfelder.toFirst();
         spielfelder.getContent().aufDiesemFeld(farbe);
         this.farbe = farbe;
         geld = 1500;
@@ -26,7 +26,7 @@ public class Spieler {
         return geld;
     }
 
-    public void setGeld(int geld){ this.geld = this.geld - geld; }
+    public void setGeld(int geld){ this.geld = this.geld + geld; }
 
     public boolean getWuerfe(){
         return wuerfelWurf;
@@ -38,18 +38,16 @@ public class Spieler {
 
     public void geheVorwaerts(int i){
         spielfelder.getContent().diesesFeldVerlassen(farbe);
-        System.out.println(farbe);
         for(int j = 0; j < i; j++){
             spielfelder.next();
             if(!spielfelder.hasAccess()){
                 spielfelder.toFirst();
             }
         }
-        System.out.println(spielfelder.getContent());
         spielfelder.getContent().aufDiesemFeld(farbe);
     }
 
-    private void spielfelderBefuellen(List<Feld> list){
+    private void spielfelderBefuellen(List<AllgemeinesFeld> list){
         list.toFirst();
         while(list.hasAccess()){
             spielfelder.append(list.getContent());
@@ -57,7 +55,7 @@ public class Spieler {
         }
     }
 
-    public Feld getMeinAktuellesFeld(){
+    public AllgemeinesFeld getMeinAktuellesFeld(){
         return spielfelder.getContent();
     }
 
@@ -75,11 +73,11 @@ public class Spieler {
         return name;
     }
 
-    public List<Feld> getSpielfelder() {
+    public List<AllgemeinesFeld> getSpielfelder() {
         return spielfelder;
     }
 
-    public Feld getAktuellesFeld(){
+    public AllgemeinesFeld getAktuellesFeld(){
         return spielfelder.getContent();
     }
 

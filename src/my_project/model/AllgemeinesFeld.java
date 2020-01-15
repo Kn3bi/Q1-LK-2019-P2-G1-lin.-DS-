@@ -42,6 +42,7 @@ public class AllgemeinesFeld extends GraphicalObject {
         drawTool.drawFilledCircle(x+20, y+60, 20);
         drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
         drawTool.drawFilledCircle(x+40, y+60, 20);
+
     }
 
     @Override
@@ -52,6 +53,7 @@ public class AllgemeinesFeld extends GraphicalObject {
     public void aufDiesemFeld(String farbe){
         if(farbe.equals("rot")){
             sichtbarkeitr = 255;
+            System.out.println("Bin angekommen");
         }else if(farbe.equals("grün")){
             sichtbarkeitgr = 255;
         }else if(farbe.equals("blau")){
