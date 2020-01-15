@@ -41,8 +41,15 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
+        drawTool.drawText(200, 850, spieler.front().getFarbe() + " hat:"+ spieler.front().getGeld());
         drawTool.drawText(700,100, spieler.front().getFarbe());
         drawTool.drawText(700, 200,spieler.front().getMeinAktuellesFeld().getName());
+        if(kaufOption){
+            drawTool.drawText(700, 300,"1. du kannst diese Straße für : " + spieler.front().getMeinAktuellesFeld().getPreis() + "€ kaufen");
+        }
+        if(fremdBesitz){
+            drawTool.drawText(700, 300, "Du musst" + spieler.front().getAktuellesFeld().getBesitzer().getFarbe() + "an"+ spieler.front().getAktuellesFeld().getMiete()+"zahlen");
+        }
     }
 
     @Override
@@ -55,6 +62,13 @@ public class SpielerControll extends InteractiveGraphicalObject {
         if(key == KeyEvent.VK_SPACE && aktuellerSpielerHatWurf()){
             spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
             spieler.front().setWuerfe(false);
+            if(spieler.front().getAktuellesFeld().isInBesitz() && spieler.front().getAktuellesFeld().getBesitzer() != spieler.front()){
+                fremdBesitz = true;
+            }else if(spieler.front().getAktuellesFeld().getBesitzer() == spieler.front()){
+
+            }else if(!spieler.front().getAktuellesFeld().isInBesitz()){
+                kaufOption = true;
+            }
         }
     }
 
@@ -120,5 +134,10 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     private void zeigeAktuelleOptionenAn(){
 
+    }
+
+    public void setzteWurfdatenZurueck(){
+        fremdBesitz = false;
+        kaufOption = false;
     }
 }

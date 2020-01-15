@@ -2,6 +2,7 @@ package my_project.model;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
+import my_project.control.SpielfeldControll;
 
 public class Feld extends AllgemeinesFeld {
 
@@ -10,12 +11,13 @@ public class Feld extends AllgemeinesFeld {
     private int sichtbarkeitg;
     private int sichtbarkeitb;
     private int sichtbarkeitgr;
+    private int haeuser;
+    private int sichtbarkeitHotel;
     private String name;
     private int preis;
     private boolean inBesitz;
     protected Spieler besitzer;
     protected int miete;
-    private int haeuser;
 
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
@@ -36,8 +38,68 @@ public class Feld extends AllgemeinesFeld {
         haeuser = 0;
     }
 
+    @Override
+    public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(0,0,0,255);
+        drawTool.drawRectangle(x, y, width, height);
+        drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
+        drawTool.drawFilledCircle(x+20, y+40, 20);
+        drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
+        drawTool.drawFilledCircle(x+40, y+40, 20);
+        drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
+        drawTool.drawFilledCircle(x+20, y+60, 20);
+        drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
+        drawTool.drawFilledCircle(x+40, y+60, 20);
+
+        drawTool.setCurrentColor(0,255,0,255);
+        if(haeuser == 1){
+            drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
+        }else if(haeuser == 2){
+            drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
+        }else if(haeuser == 3){
+            drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+30, y+5, 8, 8);
+        }else{
+            drawTool.drawFilledRectangle(x+10, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+20, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+30, y+5, 8, 8);
+            drawTool.drawFilledRectangle(x+40, y+5, 8, 8);
+        }
+
+        //if(sichtbarkeitHotel)
+    }
+
+    @Override
     public void update(double dt) {
 
+    }
+
+    public void aufDiesemFeld(String farbe){
+        if(farbe.equals("rot")){
+            sichtbarkeitr = 255;
+        }else if(farbe.equals("grün")){
+            sichtbarkeitgr = 255;
+        }else if(farbe.equals("blau")){
+            sichtbarkeitb = 255;
+        }else if(farbe.equals("gelb")){
+            sichtbarkeitg = 255;
+        }
+    }
+
+    public void diesesFeldVerlassen(String farbe){
+        if(farbe.equals("rot")){
+            System.out.println("> Sichtbarkeit auf dem aktuellen FEld wird auf Null gesetzt");
+            sichtbarkeitr = 0;
+            System.out.println(sichtbarkeitr);
+        }else if(farbe.equals("grün")){
+            sichtbarkeitgr = 0;
+        }else if(farbe.equals("blau")){
+            sichtbarkeitb = 0;
+        }else if(farbe.equals("gelb")){
+            sichtbarkeitg = 0;
+        }
     }
 
     public String getName(){
@@ -73,7 +135,33 @@ public class Feld extends AllgemeinesFeld {
         }
         return m;
     }
-    public int getMiete(){
+
+    public Gebaude[][] getMeineGebaude() {
+        return meineGebaude;
+    }
+
+    public int getSichtbarkeitr() {
+        return sichtbarkeitr;
+    }
+
+    public int getSichtbarkeitg() {
+        return sichtbarkeitg;
+    }
+
+    public int getSichtbarkeitb() {
+        return sichtbarkeitb;
+    }
+
+    public int getSichtbarkeitgr() {
+        return sichtbarkeitgr;
+    }
+
+
+    public boolean isInBesitz() {
+        return inBesitz;
+    }
+
+    public int getMiete() {
         return miete;
     }
 }

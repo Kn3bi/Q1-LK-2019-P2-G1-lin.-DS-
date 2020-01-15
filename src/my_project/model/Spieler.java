@@ -71,4 +71,23 @@ public class Spieler {
         return farbe;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<Feld> getSpielfelder() {
+        return spielfelder;
+    }
+
+    public Feld getAktuellesFeld(){
+        return spielfelder.getContent();
+    }
+
+    public boolean isWuerfelWurf() {
+        return wuerfelWurf;
+    }
+
+    public String getAktuelleStraße() {
+        return aktuelleStraße;
+    }
 }

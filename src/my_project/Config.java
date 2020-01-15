@@ -10,7 +10,7 @@ public class Config {
     public final static String WINDOW_TITLE = "Dieses Fenster hat noch keinen Titel. Einstellbar in: my_project > Config";
 
     // Breite des Programmfensters (Width) und Höhe des Programmfensters (Height)
-    public final static int WINDOW_WIDTH = 1000;
+    public final static int WINDOW_WIDTH = 1500;
     public final static int WINDOW_HEIGHT = 1029;   // Effektive Höhe ist etwa 29 Pixel geringer (Titelleiste wird mitgezählt)
 
     // Weitere Optionen für das Projekt
