@@ -105,19 +105,19 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         spielfelder[0][1] = new Feld(58, 90, 608-58, 610,"Badstraße",100);
         spielfelder[0][2] = new Ereignisfeld(58, 90, 608-58*2, 610,"Gemeinschaftsfeld");
         spielfelder[0][3] = new Feld(58, 90, 608-58*3, 610,"Turmstraße",100);
-        //spielfelder[0][4] = new Einkommenssteuer(58, 90, 608-58*4, 610,"Einkommensteuer");
-        //spielfelder[0][5] = new Bahnhof(58, 90, 608-58*5, 610,"Südbahnhof");
+        spielfelder[0][4] = new Einkommenssteuer(58, 90, 608-58*4, 610,"Einkommensteuer");
+        spielfelder[0][5] = new Bahnhof(58, 90, 608-58*5, 610,"Südbahnhof");
         spielfelder[0][6] = new Feld(58, 90, 608-58*6, 610,"Chausseestraße",100);
         spielfelder[0][7] = new Ereignisfeld(58, 90, 608-58*7, 610,"Ereignisfeld");
         spielfelder[0][8] = new Feld(58, 90, 608-58*8, 610,"Elisenstraße", 100);
         spielfelder[0][9] = new Feld(58, 90, 608-58*9, 610,"Postsraße",100);
 
-        //spielfelder[1][0] = new Gefaegnis(90, 90, 0, 610,"Gefängnis");
+        spielfelder[1][0] = new Gefaengnis(90, 90, 0, 610,"Gefängnis");
         spielfelder[1][1] = new Feld(90, 58, 0, 610-58,"Seestraße",100);
         spielfelder[1][2] = new Versorgungswerke(90, 58, 0, 610-58*2,"Elektrizitätswerk");
         spielfelder[1][3] = new Feld(90, 58, 0, 610-58*3,"Hafenstraße",0);
         spielfelder[1][4] = new Feld(90, 58, 0, 610-58*4,"Neue Straße",0);
-        //spielfelder[1][5] = new Bahnhof(90, 58, 0, 610-58*5,"Westbahnhof");
+        spielfelder[1][5] = new Bahnhof(90, 58, 0, 610-58*5,"Westbahnhof");
         spielfelder[1][6] = new Feld(90, 58, 0, 610-58*6,"Münchner Straße", 0);
         spielfelder[1][7] = new Ereignisfeld(90, 58, 0, 610-58*7,"Gemeinschaftsfeld");
         spielfelder[1][8] = new Feld(90, 58, 0, 610-58*8,"Wiener Straße", 0);
@@ -128,7 +128,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         spielfelder[2][2] = new Ereignisfeld(58, 90, 90+58, 0,"Ereignisfeld");
         spielfelder[2][3] = new Feld(58, 90, 90+58*2, 0,"Museumsstraße",0);
         spielfelder[2][4] = new Feld(58, 90, 90+58*3, 0,"Opernplatz",0);
-        //spielfelder[2][5] = new Bahnhof(58, 90, 90+58*4, 0,"Aachen Schanz Bahnhof");
+        spielfelder[2][5] = new Bahnhof(58, 90, 90+58*4, 0,"Aachen Schanz Bahnhof");
         spielfelder[2][6] = new Feld(58, 90, 90+58*5, 0,"Lessingstraße",0);
         spielfelder[2][7] = new Feld(58, 90, 90+58*6, 0,"Schillerstraße",0);
         spielfelder[2][8] = new Versorgungswerke(58, 90, 90+58*7, 0,"Wasserwerk");
@@ -139,10 +139,10 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         spielfelder[3][2] = new Feld(90, 58, 610, 90+58*1,"Hauptstraße", 0);
         spielfelder[3][3] = new Ereignisfeld(90, 58, 610, 90+58*2,"Gemeinschaftsfeld");
         spielfelder[3][4] = new Feld(90, 58, 610, 90+58*3,"Bahnhofstraße",0);
-        //spielfelder[3][5] = new Bahnhof(90, 58, 610, 90+58*4,"Hauptbahnhof");
+        spielfelder[3][5] = new Bahnhof(90, 58, 610, 90+58*4,"Hauptbahnhof");
         spielfelder[3][6] = new Ereignisfeld(90, 58, 610, 90+58*5,"Ereignisfeld");
         spielfelder[3][7] = new Feld(90, 58, 610, 90+58*6,"Parkstraße",0);
-        //spielfelder[3][8] = new Einkommenssteuer(90, 58, 610, 90+58*7,"Zusatzsteuer");
+        spielfelder[3][8] = new Einkommenssteuer(90, 58, 610, 90+58*7,"Zusatzsteuer");
         spielfelder[3][9] = new Feld(90, 58, 610, 90+58*8,"Schloßallee",0);
 
         for(int i = 0; i < spielfelder.length; i++){
