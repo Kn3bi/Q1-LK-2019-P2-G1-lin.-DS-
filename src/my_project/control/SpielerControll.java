@@ -53,16 +53,16 @@ public class SpielerControll extends InteractiveGraphicalObject {
                     + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€");
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Bahnhof){
             if (kaufOption) {
-                drawTool.drawText(700, 300, "1. du kannst diese Straße für: "
-                        + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
+                drawTool.drawText(700, 300, "Du kannst diesen Bahnhof für: "
+                        + ((Bahnhof) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
             }else if(fremdBesitz) {
                 drawTool.drawText(700, 300, "Du musstest an "
-                        + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe()
-                        + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ Miete zahlen");
+                        + ((Bahnhof) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe()
+                        + " Miete zahlen");
             }
 
-            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
-                drawTool.drawText(700, 300, "Diese Straße gehört dir");
+            if (((Bahnhof) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
+                drawTool.drawText(700, 300, "Dieser Bahnhof gehört dir");
             }
         }
 
@@ -138,6 +138,13 @@ public class SpielerControll extends InteractiveGraphicalObject {
                             spieler.front().setGeld(-(((Feld) spieler.front().getAktuellesFeld()).getHauspreis()));
                         }
                     }
+                }else  if (spieler.front().getAktuellesFeld() instanceof Bahnhof) {
+                    if (kaufOption && key == KeyEvent.VK_1) {
+                        ((Bahnhof) spieler.front().getAktuellesFeld()).kaufen(spieler.front());
+                        spieler.front().setGeld(-((Bahnhof) spieler.front().getAktuellesFeld()).getPreis());
+                        kaufOption = false;
+                        neukauf = true;
+                    }
                 }
             }
     }
@@ -185,8 +192,15 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 spieler.front().setGeld(-((Feld) spieler.front().getMeinAktuellesFeld()).getMiete());
                 ((Feld) spieler.front().getMeinAktuellesFeld()).getBesitzer().setGeld(((Feld) spieler.front().getMeinAktuellesFeld()).getMiete());
             }else if (spieler.front().getAktuellesFeld() instanceof Bahnhof) {
-                int miete = 25;
-                for(int i = 0; i < ueberpruefeWieVieleBahnhoefeInBesitz(spieler.front()); i++) miete = miete*2;
+                int miete = 0;
+                for(int i = 0; i < ueberpruefeWieVieleBahnhoefeInBesitz(spieler.front()); i++) {
+                    if(i == 0) {
+                        miete = 25;
+                    }else{
+                        miete = miete * 2;
+                    }
+                    System.out.println("DieMiete funktioniert00");
+                }
                 spieler.front().setGeld(-miete);
                 ((Bahnhof) spieler.front().getMeinAktuellesFeld()).getBesitzer().setGeld(miete);
             }
@@ -305,11 +319,17 @@ public class SpielerControll extends InteractiveGraphicalObject {
         }
 
         private int ueberpruefeWieVieleBahnhoefeInBesitz(Spieler s){
-            if(spieler == null) return Integer.MIN_VALUE;
+
             int anzahlBahnhof = 0;
             spielfelder.toFirst();
             while (spielfelder.hasAccess()) {
-                if(((Bahnhof)spielfelder.getContent()).getBesitzer().equals(s)) anzahlBahnhof += 1;
+                if(spielfelder.getContent() instanceof Bahnhof){
+                    if(((Bahnhof)spielfelder.getContent()).getBesitzer() != null){
+                        if(((Bahnhof)spielfelder.getContent()).getBesitzer() == ((Bahnhof)s.getAktuellesFeld()).getBesitzer()){
+                            anzahlBahnhof += 1;
+                        }
+                    }
+                }
                 spielfelder.next();
             }
             return anzahlBahnhof;

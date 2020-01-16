@@ -24,4 +24,9 @@ public class Bahnhof extends AllgemeinesFeld {
     public boolean isInBesitz() {
         return inBesitz;
     }
+
+    public void kaufen(Spieler s){
+        inBesitz = true;
+        besitzer = s;
+    }
 }
