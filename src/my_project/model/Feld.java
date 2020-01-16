@@ -11,7 +11,6 @@ public class Feld extends AllgemeinesFeld {
     private int sichtbarkeitgr;
     private int haeuser;
     private boolean hotel;
-    private String name;
     private int preis;
     private boolean inBesitz;
     protected Spieler besitzer;
@@ -20,11 +19,6 @@ public class Feld extends AllgemeinesFeld {
 
     public Feld(int breite, int hoehe, double x, double y,String name,int preis){
         super(breite,hoehe,x,y,name);
-        width = breite;
-        height = hoehe;
-        this.x = x;
-        this.y =y;
-        this.name = name;
         this.preis = preis;
         meineGebaude = new Gebaude[2][4];
         sichtbarkeitb =0;

@@ -44,15 +44,26 @@ public class SpielerControll extends InteractiveGraphicalObject {
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.drawText(700, 500, spieler.front().getFarbe() + " hat:" + spieler.front().getGeld());
-        drawTool.drawText(800, 5, spieler.front().getFarbe());
+        drawTool.drawText(950, 25, spieler.front().getFarbe());
         drawTool.drawText(700, 200, "Aktuelles Feld: " + spieler.front().getMeinAktuellesFeld().getName());
         if (!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Feld) {
             zeigeAktuelleOptionenFeld(drawTool);
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Einkommenssteuer){
             drawTool.drawText(700, 300, "Du musst eine Steuer zahlen, in Höhe von: "
-                    + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€ Miete zahlen");
+                    + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€");
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Bahnhof){
+            if (kaufOption) {
+                drawTool.drawText(700, 300, "1. du kannst diese Straße für: "
+                        + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
+            }else if(fremdBesitz) {
+                drawTool.drawText(700, 300, "Du musstest an "
+                        + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe()
+                        + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ Miete zahlen");
+            }
 
+            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
+                drawTool.drawText(700, 300, "Diese Straße gehört dir");
+            }
         }
 
         if (spieler.front().getImGefängnis()) {
@@ -97,9 +108,14 @@ public class SpielerControll extends InteractiveGraphicalObject {
                     if (((Feld) spieler.front().getAktuellesFeld()).isInBesitz() && ((Feld) spieler.front().getAktuellesFeld()).getBesitzer() != spieler.front()) {
                         fremdBesitz = true;
                         bezahleMiete();
-                    } else if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
-
-                    } else if (!((Feld) spieler.front().getAktuellesFeld()).isInBesitz()) {
+                    }else if (!((Feld) spieler.front().getAktuellesFeld()).isInBesitz()) {
+                        kaufOption = true;
+                    }
+                }else if (spieler.front().getAktuellesFeld() instanceof Bahnhof) {
+                    if (((Bahnhof) spieler.front().getAktuellesFeld()).isInBesitz() && ((Bahnhof) spieler.front().getAktuellesFeld()).getBesitzer() != spieler.front()) {
+                        fremdBesitz = true;
+                        bezahleMiete();
+                    }else if (!((Bahnhof) spieler.front().getAktuellesFeld()).isInBesitz()) {
                         kaufOption = true;
                     }
                 }
@@ -165,11 +181,14 @@ public class SpielerControll extends InteractiveGraphicalObject {
         }
 
         public void bezahleMiete () {
-            System.out.println(((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe());
             if (spieler.front().getAktuellesFeld() instanceof Feld) {
                 spieler.front().setGeld(-((Feld) spieler.front().getMeinAktuellesFeld()).getMiete());
                 ((Feld) spieler.front().getMeinAktuellesFeld()).getBesitzer().setGeld(((Feld) spieler.front().getMeinAktuellesFeld()).getMiete());
-
+            }else if (spieler.front().getAktuellesFeld() instanceof Bahnhof) {
+                int miete = 25;
+                for(int i = 0; i < ueberpruefeWieVieleBahnhoefeInBesitz(spieler.front()); i++) miete = miete*2;
+                spieler.front().setGeld(-miete);
+                ((Bahnhof) spieler.front().getMeinAktuellesFeld()).getBesitzer().setGeld(miete);
             }
         }
 
@@ -215,9 +234,6 @@ public class SpielerControll extends InteractiveGraphicalObject {
         public boolean aktuellerSpielerHatWurf () {
             return spieler.front().getWuerfe();
         }
-        public Spieler getAktuellerSpieler () {
-            return spieler.front();
-        }
 
         public void rotiereSpieler () {
             spieler.enqueue(spieler.front());
@@ -228,17 +244,23 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
         private void zeigeAktuelleOptionenFeld (DrawTool drawTool) {
             if (kaufOption) {
-                drawTool.drawText(700, 300, "1. du kannst diese Straße für: " + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
+                drawTool.drawText(700, 300, "1. du kannst diese Straße für: "
+                        + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
             }else if(fremdBesitz) {
-                drawTool.drawText(700, 300, "Du musstest an " + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe() + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ zahlen");
+                drawTool.drawText(700, 300, "Du musstest an "
+                        + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe()
+                        + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ Miete zahlen");
             }
 
             if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
                 drawTool.drawText(700, 300, "Diese Straße gehört dir");
                 if (((Feld) spieler.front().getAktuellesFeld()).getHaeuseranzahl() < 4) {
-                    drawTool.drawText(700, 400, "Du kannst für: " + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "€ ein Haus kaufen");
+                    drawTool.drawText(700, 400, "Du kannst für: "
+                            + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "€ ein Haus kaufen");
                 } else if(!((Feld) spieler.front().getAktuellesFeld()).getHotel()){
-                    drawTool.drawText(700, 400, "Du kannst für: " + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "€ ein Hotel kaufen");
+                    drawTool.drawText(700, 400, "Du kannst für: "
+                            + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis()
+                            + "€ ein Hotel kaufen");
                 }
 
             }
@@ -280,5 +302,16 @@ public class SpielerControll extends InteractiveGraphicalObject {
                     return false;
                 }
             }
+        }
+
+        private int ueberpruefeWieVieleBahnhoefeInBesitz(Spieler s){
+            if(spieler == null) return Integer.MIN_VALUE;
+            int anzahlBahnhof = 0;
+            spielfelder.toFirst();
+            while (spielfelder.hasAccess()) {
+                if(((Bahnhof)spielfelder.getContent()).getBesitzer().equals(s)) anzahlBahnhof += 1;
+                spielfelder.next();
+            }
+            return anzahlBahnhof;
         }
     }

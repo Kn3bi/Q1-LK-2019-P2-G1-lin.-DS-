@@ -112,7 +112,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         spielfelder[0][8] = new Feld(58, 90, 608-58*8, 610,"Vaalser Straße", 100);
         spielfelder[0][9] = new Feld(58, 90, 608-58*9, 610,"Krefelder Straße",120);
 
-        spielfelder[1][0] = new Gefaengnis(90, 90, 0, 610,"Gefängnis");
+        spielfelder[1][0] = new Gefaengnis(90, 90, 0, 610,"Gehe ins Gefängnis");
         spielfelder[1][1] = new Feld(90, 58, 0, 610-58,"Adalbertsteinweg",140);
         spielfelder[1][2] = new Versorgungswerke(90, 58, 0, 610-58*2,"Elektrizitätswerk");
         spielfelder[1][3] = new Feld(90, 58, 0, 610-58*3,"Kurbrunnen Straße",140);

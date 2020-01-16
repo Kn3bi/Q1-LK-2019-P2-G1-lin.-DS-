@@ -10,7 +10,7 @@ public class AllgemeinesFeld extends GraphicalObject {
     protected int sichtbarkeitg;
     protected int sichtbarkeitb;
     protected int sichtbarkeitgr;
-    private String name;
+    protected String name;
 
 
 
