@@ -102,11 +102,12 @@ public class SpielerControll extends InteractiveGraphicalObject {
                     spieler.front().setMeinAktuellesFeld(spielfelder.getContent());
                     spieler.front().getAktuellesFeld().aufDiesemFeld(spieler.front().getFarbe());
 
-                } else if (spieler.front().getAktuellesFeld() instanceof Spezialfeld) {
-                    //Platz für Spezialfelder
+                } else if (spieler.front().getAktuellesFeld() instanceof Einkommenssteuer) {
+                    spieler.front().setGeld(-((Einkommenssteuer) spieler.front().getAktuellesFeld()).getSteuern());
                 } else if (spieler.front().getAktuellesFeld() instanceof Feld) {
                     if (((Feld) spieler.front().getAktuellesFeld()).isInBesitz() && ((Feld) spieler.front().getAktuellesFeld()).getBesitzer() != spieler.front()) {
                         fremdBesitz = true;
+                        bezahleMiete();
                     } else if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
 
                     } else if (!((Feld) spieler.front().getAktuellesFeld()).isInBesitz()) {
