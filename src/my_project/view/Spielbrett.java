@@ -16,7 +16,7 @@ public class Spielbrett extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-        //drawTool.drawImage(spielplan, 0, 0);
+        drawTool.drawImage(spielplan, 0, 0);
     }
 
     @Override
