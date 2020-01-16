@@ -23,7 +23,7 @@ public class Wuerfel extends GraphicalObject {
         wuerfel[2] = getMyImage();
         setNewImage("assets/images/wuerfel/wuerfelVier.png");
         wuerfel[3] = getMyImage();
-        setNewImage("assets/images/wuerfel/wuerfelFFünf.png");
+        setNewImage("assets/images/wuerfel/wuerfelFünf.png");
         wuerfel[4] = getMyImage();
         setNewImage("assets/images/wuerfel/wuerfelSechs.png");
         wuerfel[5] = getMyImage();
@@ -43,19 +43,9 @@ public class Wuerfel extends GraphicalObject {
 
     public int wuerfelnIntern(){
         int augzahl = 1+ (int)(Math.random()*6);
-        if(augzahl == 1){
-
-        }else if(augzahl == 2){
-
-        }else if(augzahl ==3){
-
-        }else if(augzahl == 4){
-
-        }else if(augzahl == 5){
-
-        }else{
-
-        }
+        System.out.println("----------------------------------------------");
+        System.out.println(augzahl);
+        System.out.println("----------------------------------------------");
         return augzahl;
     }
 

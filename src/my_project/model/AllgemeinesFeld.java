@@ -66,7 +66,6 @@ public class AllgemeinesFeld extends GraphicalObject {
     public void aufDiesemFeld(String farbe){
         if(farbe.equals("rot")){
             sichtbarkeitr = 255;
-            System.out.println("Bin angekommen");
         }else if(farbe.equals("grün")){
             sichtbarkeitgr = 255;
         }else if(farbe.equals("blau")){
@@ -78,7 +77,6 @@ public class AllgemeinesFeld extends GraphicalObject {
 
     public void diesesFeldVerlassen(String farbe){
         if(farbe.equals("rot")){
-            System.out.println("> Sichtbarkeit auf dem aktuellen FEld wird auf Null gesetzt");
             sichtbarkeitr = 0;
             System.out.println(sichtbarkeitr);
         }else if(farbe.equals("grün")){

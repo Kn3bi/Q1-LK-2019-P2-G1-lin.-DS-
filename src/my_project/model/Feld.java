@@ -150,7 +150,11 @@ public class Feld extends AllgemeinesFeld {
     }
 
     public int getHaeuseranzahl(){
-        return haeuser;
+        if(hotel){
+            return 5;
+        }else {
+            return haeuser;
+        }
     }
 
     public void kaufen(Spieler s){
@@ -171,5 +175,9 @@ public class Feld extends AllgemeinesFeld {
             haeuser = 0;
             hotel = true;
         }
+    }
+
+    public boolean getHotel() {
+        return hotel;
     }
 }

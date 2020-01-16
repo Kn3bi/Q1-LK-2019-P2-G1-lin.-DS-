@@ -21,9 +21,11 @@ public class SpielerControll extends InteractiveGraphicalObject {
     private boolean kaufOption;
     private boolean fremdBesitz;
     private boolean neukauf;
+    private int test;
 
 
     public SpielerControll(ProgramController pC, ViewController vC) {
+        test = 0;
         this.pC = pC;
         this.vC = vC;
         meineWuerfel = new Wuerfel();
@@ -45,24 +47,10 @@ public class SpielerControll extends InteractiveGraphicalObject {
         drawTool.drawText(800, 5, spieler.front().getFarbe());
         drawTool.drawText(700, 200, "Aktuelles Feld: " + spieler.front().getMeinAktuellesFeld().getName());
         if (!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Feld) {
-            if (kaufOption) {
-                drawTool.drawText(700, 300, "1. du kannst diese Straße für : " + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
-            }
-            if (fremdBesitz) {
-                drawTool.drawText(700, 300, "Du musst an " + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe() + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ zahlen");
-            }
-            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
-                drawTool.drawText(700, 300, "Diese Straße gehört dir");
-                if (((Feld) spieler.front().getAktuellesFeld()).getHaeuseranzahl() < 4) {
-                    drawTool.drawText(700, 400, "Du kannst für" + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "ein Haus kaufen");
-                } else {
-                    drawTool.drawText(700, 400, "Du kannst für" + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "ein Hotel kaufen");
-                }
-
-            }
+            zeigeAktuelleOptionenFeld(drawTool);
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Einkommenssteuer){
             drawTool.drawText(700, 300, "Du musst eine Steuer zahlen, in Höhe von: "
-                    + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€ zahlen");
+                    + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€ Miete zahlen");
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Bahnhof){
 
         }
@@ -91,9 +79,10 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 spieler.front().setWuerfe(false);
             }
             if (!spieler.front().getImGefängnis()) {
-                spieler.front().geheVorwaerts(10);
+                spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
                 spieler.front().setWuerfe(false);
-                //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist, meineWuerfel.wuerfelErgebniss()
+
+                //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist,
                 if (spieler.front().getAktuellesFeld().getName().equals("Gehe ins Gefängnis")) {
                     spieler.front().setImGefängnis(true);
                     spielfelder.toFirst();
@@ -128,7 +117,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
                         neukauf = true;
                     }
                     if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
-                        if (key == KeyEvent.VK_1) {
+                        if (key == KeyEvent.VK_1 && ((Feld) spieler.front().getAktuellesFeld()).getHaeuseranzahl() < 5){
                             ((Feld) spieler.front().getAktuellesFeld()).setHaeuserAnzahl();
                             spieler.front().setGeld(-(((Feld) spieler.front().getAktuellesFeld()).getHauspreis()));
                         }
@@ -237,17 +226,59 @@ public class SpielerControll extends InteractiveGraphicalObject {
             setzteWurfdatenZurueck();
         }
 
-    /*public void geheInsGefängnis(){
-        spieler.front().setMeinAktuellesFeld("Gefängnis")
-    }*/
+        private void zeigeAktuelleOptionenFeld (DrawTool drawTool) {
+            if (kaufOption) {
+                drawTool.drawText(700, 300, "1. du kannst diese Straße für: " + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
+            }else if(fremdBesitz) {
+                drawTool.drawText(700, 300, "Du musstest an " + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe() + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ zahlen");
+            }
 
-        private void zeigeAktuelleOptionenAn () {
+            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
+                drawTool.drawText(700, 300, "Diese Straße gehört dir");
+                if (((Feld) spieler.front().getAktuellesFeld()).getHaeuseranzahl() < 4) {
+                    drawTool.drawText(700, 400, "Du kannst für: " + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "€ ein Haus kaufen");
+                } else if(!((Feld) spieler.front().getAktuellesFeld()).getHotel()){
+                    drawTool.drawText(700, 400, "Du kannst für: " + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "€ ein Hotel kaufen");
+                }
+
+            }
+        }
+
+         private void zeigeAktuelleOptionenBahnhof (DrawTool drawTool) {
+
+         }
+
+        private void zeigeAktuelleOptionenGefaengnis (DrawTool drawTool) {
 
         }
+
 
         public void setzteWurfdatenZurueck () {
             fremdBesitz = false;
             kaufOption = false;
             neukauf = false;
+        }
+
+        private boolean ueberpruefeObAlleStrassenInBesitz(String farbe, Spieler s){
+            if(spieler == null || farbe == null) return false;
+            int anzahlStrassenDerFarbe = 0;
+            spielfelder.toFirst();
+            while (spielfelder.hasAccess()) {
+                //if(((Feld)spielfelder.getContent()).getFarbe().equals(farbe)) anzahlStrassenDerFarbe += 1;
+                spielfelder.next();
+            }
+            if(farbe.equals("braun") || farbe.equals("blau")) {
+                if(anzahlStrassenDerFarbe == 2){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                if(anzahlStrassenDerFarbe == 3){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         }
     }
