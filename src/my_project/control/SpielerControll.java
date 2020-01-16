@@ -68,7 +68,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
         }
 
         if (spieler.front().getImGefängnis()) {
-            drawTool.drawText(700, 300, "Drücke >b<, um 50$ zu bezahlen " +
+            drawTool.drawText(700, 300, "Drücke >b<, um 500€ zu bezahlen " +
                     "und aus dem Gefängnis zu entkommen");
         }
 
@@ -91,16 +91,16 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 spieler.front().setWuerfe(false);
             }
             if (!spieler.front().getImGefängnis()) {
-                spieler.front().geheVorwaerts(meineWuerfel.wuerfelErgebniss());
+                spieler.front().geheVorwaerts(10);
                 spieler.front().setWuerfe(false);
-                //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist
+                //prüft, ob der Spieler in einem Gefängnisfeld gelandet ist, meineWuerfel.wuerfelErgebniss()
                 if (spieler.front().getAktuellesFeld().getName().equals("Gehe ins Gefängnis")) {
                     spieler.front().setImGefängnis(true);
                     spielfelder.toFirst();
                     while(!spielfelder.getContent().getName().equals("Gefängnis")) spielfelder.next();
                     spieler.front().getAktuellesFeld().diesesFeldVerlassen(spieler.front().getFarbe());
                     spieler.front().setMeinAktuellesFeld(spielfelder.getContent());
-                    spieler.front().getAktuellesFeld().aufDiesemFeld(spieler.front().getFarbe());
+                    ((Gefaengnis)spieler.front().getAktuellesFeld()).aufDiesemFeldImGefaengnis(spieler.front().getFarbe());
 
                 } else if (spieler.front().getAktuellesFeld() instanceof Einkommenssteuer) {
                     spieler.front().setGeld(-((Einkommenssteuer) spieler.front().getAktuellesFeld()).getSteuern());
@@ -157,7 +157,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 spieler.setZeitImGefängnis(spieler.getZeitImGefängnis() + 1);
                 if (raus) {  // Falls die Erlabnis erteilt wurde(durch drücken von der Taste b )
                     // , raus zu gehen --> Gehe raus und bezahle
-                    spieler.setGeld(spieler.getGeld() - 50);
+                    spieler.setGeld(- 500);
                     spieler.setImGefängnis(false);
                     spieler.setZeitImGefängnis(0);
                 } else if (meineWuerfel.getZahlEins() == meineWuerfel.getZahlZwei()
