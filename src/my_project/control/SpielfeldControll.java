@@ -2,6 +2,7 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.InteractiveGraphicalObject;
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import KAGO_framework.view.DrawTool;
 import my_project.model.*;
 import my_project.view.RotationsButton;
@@ -15,6 +16,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private RotationsButton naechsterButton;
     private String[][] namen;
     private int[][] preise;
+    private Stack<Karte> karten;
 
 
     public SpielfeldControll(SpielerControll spC, ViewController vC){
@@ -27,6 +29,8 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         setzeStraßennamen();
         setPreis();
         erzeugeFelder();
+        karten = new Stack();
+        erzeugeKarten();
         vC.register(naechsterButton, 2);
         vC.draw(naechsterButton, 2);
     }
@@ -157,70 +161,26 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     }
 
     public void setzeStraßennamen(){
-
-
-
-
-
     }
 
     public void setPreis(){
-        preise[0][0] = 60;
-        preise[0][1] = 0;
-        preise[0][2] = 60;
-        preise[0][3] = 0;
-        preise[0][4] = 200;
-        preise[0][5] = 100;
-        preise[0][6] = 0;
-        preise[0][7] = 100;
-        preise[0][8] = 100;
-        preise[1][9] = 0;
-
-        preise[1][0] = 140;
-        preise[1][1] = 150;
-        preise[1][2] = 140;
-        preise[1][3] = 160;
-        preise[1][4] = 200;
-        preise[1][5] = 180;
-        preise[1][6] = 0;
-        preise[1][7] = 180;
-        preise[1][8] = 200;
-        preise[2][9] = 0;
-
-        preise[2][0] = 220;
-        preise[2][1] = 0;
-        preise[2][2] = 220;
-        preise[2][3] = 240;
-        preise[2][4] = 200;
-        preise[2][5] = 260;
-        preise[2][6] = 260;
-        preise[2][7] = 150;
-        preise[2][8] = 280;
-        preise[3][9] = 0;
-
-        preise[3][0] = 300;
-        preise[3][1] = 300;
-        preise[3][2] = 0;
-        preise[3][3] = 320;
-        preise[3][4] = 200;
-        preise[3][5] = 0;
-        preise[3][6] = 350;
-        preise[3][7] = 100;
-        preise[3][8] = 400;
-        preise[0][9] = 0;
     }
 
+    private void erzeugeKarten(){
+        karten.push(new FeldWechselKarte("Gehe auf Los!", null, null, null));
+        karten.push(new FeldWechselKarte("Begib dich zur Schloßallee", null, null, null));
+        karten.push(new FeldWechselKarte("Du besuchst das Gefängnis", null, null, null));
+        karten.push(new FeldWechselKarte("Betrete das Feld frei parken", null, null, null));
+        karten.push(new GeldVeraenderndeKarte("Du hast einen Schönheitswettbewerb gewonnen", "Du erhälst 50€", null, null));
+        karten.push(new GeldVeraenderndeKarte("Wegen deines guten Betragens ", "erhälst du 200€", null, null));
+        karten.push(new GeldVeraenderndeKarte("Di eWelt meint es gut mit dir", "Hier hast du 50€", null, null));
 
-    public int getPreis(int i,int j){
-        return preise[i][j];
     }
-    public String getNamen(int i,int j){
-        return namen[i][j];
-    }
-   /*
-    public Feld getAktuellesFeld(){
-       // return
-    }
-    */
 
+    public Karte erhalteKarte(){
+        if(karten.isEmpty()) erzeugeKarten();
+        Karte rueckgabe = karten.top();
+        karten.pop();
+        return rueckgabe;
+    }
 }

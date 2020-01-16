@@ -43,9 +43,12 @@ public class SpielerControll extends InteractiveGraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
+        drawTool.setCurrentColor(0,0,0,255);
+        drawTool.formatText("b", 5, 30);
         drawTool.drawText(700, 500, spieler.front().getFarbe() + " hat:" + spieler.front().getGeld());
         drawTool.drawText(950, 25, spieler.front().getFarbe());
         drawTool.drawText(700, 200, "Aktuelles Feld: " + spieler.front().getMeinAktuellesFeld().getName());
+        if(spieler.front().getWuerfe()) drawTool.drawText(700,600,"Würfeln");
         if (!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Feld) {
             zeigeAktuelleOptionenFeld(drawTool);
         }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Einkommenssteuer){

@@ -3,6 +3,7 @@ package my_project.control;
 import KAGO_framework.control.ViewController;
 import my_project.model.AllgemeinesFeld;
 import my_project.model.Feld;
+import my_project.model.Karte;
 import my_project.view.Anleitung;
 import my_project.view.Spielbrett;
 import my_project.view.Startbildschirm;
@@ -86,5 +87,7 @@ public class ProgramController {
     public AllgemeinesFeld[][] getSpielfelder(){
         return spielfeldControll.getSpielfelder();
     }
-
+    public Karte uebermittleKarte(){
+        return spielfeldControll.erhalteKarte();
+    }
 }
