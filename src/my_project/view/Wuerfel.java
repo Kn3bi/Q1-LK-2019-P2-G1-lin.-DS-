@@ -41,11 +41,8 @@ public class Wuerfel extends GraphicalObject {
 
 
 
-    public int wuerfelnIntern(){
+    private int wuerfelnIntern(){
         int augzahl = 1+ (int)(Math.random()*6);
-        System.out.println("----------------------------------------------");
-        System.out.println(augzahl);
-        System.out.println("----------------------------------------------");
         return augzahl;
     }
 
