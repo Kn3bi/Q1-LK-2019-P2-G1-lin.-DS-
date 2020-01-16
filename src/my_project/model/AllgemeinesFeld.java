@@ -32,16 +32,29 @@ public class AllgemeinesFeld extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(0,0,0,255);
-        drawTool.drawRectangle(x, y, width, height);
-        drawTool.setCurrentColor(255,0,0,sichtbarkeitr);
-        drawTool.drawFilledCircle(x+20, y+40, 20);
-        drawTool.setCurrentColor(0,255,0,sichtbarkeitg);
-        drawTool.drawFilledCircle(x+40, y+40, 20);
-        drawTool.setCurrentColor(0,0,255,sichtbarkeitb);
-        drawTool.drawFilledCircle(x+20, y+60, 20);
-        drawTool.setCurrentColor(0,255,255,sichtbarkeitgr);
-        drawTool.drawFilledCircle(x+40, y+60, 20);
+        if(width == 58) {
+            drawTool.setCurrentColor(0, 0, 0, 255);
+            drawTool.drawRectangle(x, y, width, height);
+            drawTool.setCurrentColor(255, 0, 0, sichtbarkeitr);
+            drawTool.drawFilledCircle(x + 20, y + 40, 20);
+            drawTool.setCurrentColor(0, 255, 0, sichtbarkeitg);
+            drawTool.drawFilledCircle(x + 40, y + 40, 20);
+            drawTool.setCurrentColor(0, 0, 255, sichtbarkeitb);
+            drawTool.drawFilledCircle(x + 20, y + 60, 20);
+            drawTool.setCurrentColor(0, 255, 255, sichtbarkeitgr);
+            drawTool.drawFilledCircle(x + 40, y + 60, 20);
+        }else{
+            drawTool.setCurrentColor(0, 0, 0, 255);
+            drawTool.drawRectangle(x, y, width, height);
+            drawTool.setCurrentColor(255, 0, 0, sichtbarkeitr);
+            drawTool.drawFilledCircle(x + 40, y + 20, 20);
+            drawTool.setCurrentColor(0, 255, 0, sichtbarkeitg);
+            drawTool.drawFilledCircle(x + 40, y + 20, 20);
+            drawTool.setCurrentColor(0, 0, 255, sichtbarkeitb);
+            drawTool.drawFilledCircle(x + 60, y + 40, 20);
+            drawTool.setCurrentColor(0, 255, 255, sichtbarkeitgr);
+            drawTool.drawFilledCircle(x + 60, y + 40, 20);
+        }
 
     }
 

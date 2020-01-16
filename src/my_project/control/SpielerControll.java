@@ -5,10 +5,7 @@ import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.view.DrawTool;
-import my_project.model.AllgemeinesFeld;
-import my_project.model.Feld;
-import my_project.model.Spezialfeld;
-import my_project.model.Spieler;
+import my_project.model.*;
 import my_project.view.Wuerfel;
 
 import java.awt.event.KeyEvent;
@@ -23,6 +20,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
     private ViewController vC;
     private boolean kaufOption;
     private boolean fremdBesitz;
+    private boolean neukauf;
 
 
     public SpielerControll(ProgramController pC, ViewController vC) {
@@ -32,6 +30,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
         vC.draw(meineWuerfel, 2);
         spielfelder = new List<>();
         befuelleListe();
+        neukauf = false;
         spieler = new Queue<>();
         spieler.enqueue(new Spieler("rot", spielfelder, true));
         spieler.enqueue(new Spieler("grün", spielfelder, true));
@@ -43,8 +42,8 @@ public class SpielerControll extends InteractiveGraphicalObject {
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.drawText(700, 500, spieler.front().getFarbe() + " hat:" + spieler.front().getGeld());
-        drawTool.drawText(700, 100, spieler.front().getFarbe());
-        drawTool.drawText(700, 200, spieler.front().getMeinAktuellesFeld().getName());
+        drawTool.drawText(800, 5, spieler.front().getFarbe());
+        drawTool.drawText(700, 200, "Aktuelles Feld: " + spieler.front().getMeinAktuellesFeld().getName());
         if (!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Feld) {
             if (kaufOption) {
                 drawTool.drawText(700, 300, "1. du kannst diese Straße für : " + ((Feld) spieler.front().getMeinAktuellesFeld()).getPreis() + "€ kaufen");
@@ -52,7 +51,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
             if (fremdBesitz) {
                 drawTool.drawText(700, 300, "Du musst an " + ((Feld) spieler.front().getAktuellesFeld()).getBesitzer().getFarbe() + ", " + ((Feld) spieler.front().getAktuellesFeld()).getMiete() + "€ zahlen");
             }
-            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
+            if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
                 drawTool.drawText(700, 300, "Diese Straße gehört dir");
                 if (((Feld) spieler.front().getAktuellesFeld()).getHaeuseranzahl() < 4) {
                     drawTool.drawText(700, 400, "Du kannst für" + ((Feld) spieler.front().getAktuellesFeld()).getHauspreis() + "ein Haus kaufen");
@@ -61,7 +60,13 @@ public class SpielerControll extends InteractiveGraphicalObject {
                 }
 
             }
+        }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Einkommenssteuer){
+            drawTool.drawText(700, 300, "Du musst eine Steuer zahlen, in Höhe von: "
+                    + ((Einkommenssteuer)spieler.front().getAktuellesFeld()).getSteuern()+ "€ zahlen");
+        }else if(!spieler.front().getWuerfe() && spieler.front().getAktuellesFeld() instanceof Bahnhof){
+
         }
+
         if (spieler.front().getImGefängnis()) {
             drawTool.drawText(700, 300, "Drücke >b<, um 50$ zu bezahlen " +
                     "und aus dem Gefängnis zu entkommen");
@@ -119,9 +124,10 @@ public class SpielerControll extends InteractiveGraphicalObject {
                         ((Feld) spieler.front().getAktuellesFeld()).kaufen(spieler.front());
                         spieler.front().setGeld(-((Feld) spieler.front().getAktuellesFeld()).getPreis());
                         kaufOption = false;
+                        neukauf = true;
                     }
-                    if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front()) {
-                        if (key == KeyEvent.VK_2) {
+                    if (((Feld) spieler.front().getAktuellesFeld()).getBesitzer() == spieler.front() && !neukauf) {
+                        if (key == KeyEvent.VK_1) {
                             ((Feld) spieler.front().getAktuellesFeld()).setHaeuserAnzahl();
                             spieler.front().setGeld(-(((Feld) spieler.front().getAktuellesFeld()).getHauspreis()));
                         }
@@ -227,6 +233,7 @@ public class SpielerControll extends InteractiveGraphicalObject {
             spieler.enqueue(spieler.front());
             spieler.front().setWuerfe(true);
             spieler.dequeue();
+            setzteWurfdatenZurueck();
         }
 
     /*public void geheInsGefängnis(){
@@ -240,5 +247,6 @@ public class SpielerControll extends InteractiveGraphicalObject {
         public void setzteWurfdatenZurueck () {
             fremdBesitz = false;
             kaufOption = false;
+            neukauf = false;
         }
     }

@@ -102,10 +102,10 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
     private void erzeugeFelder(){
 
         spielfelder[0][0] = new AllgemeinesFeld(90, 90, 608, 610,"Los!");
-        spielfelder[0][1] = new Feld(58, 90, 608-58, 610,"Badstraße",100);
+        spielfelder[0][1] = new Feld(58, 90, 608-58, 610,"Neupforte",100);
         spielfelder[0][2] = new Ereignisfeld(58, 90, 608-58*2, 610,"Gemeinschaftsfeld");
-        spielfelder[0][3] = new Feld(58, 90, 608-58*3, 610,"Turmstraße",100);
-        spielfelder[0][4] = new Einkommenssteuer(58, 90, 608-58*4, 610,"Einkommensteuer");
+        spielfelder[0][3] = new Feld(58, 90, 608-58*3, 610,"Holzgraben",100);
+        spielfelder[0][4] = new Einkommenssteuer(58, 90, 608-58*4, 610,"Einkommensteuer", 200);
         spielfelder[0][5] = new Bahnhof(58, 90, 608-58*5, 610,"Südbahnhof");
         spielfelder[0][6] = new Feld(58, 90, 608-58*6, 610,"Chausseestraße",100);
         spielfelder[0][7] = new Ereignisfeld(58, 90, 608-58*7, 610,"Ereignisfeld");
@@ -142,7 +142,7 @@ public class SpielfeldControll extends InteractiveGraphicalObject {
         spielfelder[3][5] = new Bahnhof(90, 58, 610, 90+58*4,"Hauptbahnhof");
         spielfelder[3][6] = new Ereignisfeld(90, 58, 610, 90+58*5,"Ereignisfeld");
         spielfelder[3][7] = new Feld(90, 58, 610, 90+58*6,"Parkstraße",0);
-        spielfelder[3][8] = new Einkommenssteuer(90, 58, 610, 90+58*7,"Zusatzsteuer");
+        spielfelder[3][8] = new Einkommenssteuer(90, 58, 610, 90+58*7,"Zusatzsteuer", 200);
         spielfelder[3][9] = new Feld(90, 58, 610, 90+58*8,"Schloßallee",0);
 
         for(int i = 0; i < spielfelder.length; i++){
